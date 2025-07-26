@@ -1,0 +1,53 @@
+<!-- /src/pages/CoursesPage/CoursesPage.html -->
+
+<div class="courses-page-wrapper">
+    <!-- Link to component and page-specific stylesheets -->
+    <link rel="stylesheet" href="../src/reset.css">
+    <link rel="stylesheet" href="../src/pages/HomePage/HomePage.css">
+    <link rel="stylesheet" href="/src/components/Navbar/Navbar.css">
+    <link rel="stylesheet" href="/src/components/CourseCard/CourseCard.css">
+    <link rel="stylesheet" href="/src/pages/CoursesPage/CoursesPage.css">
+
+    <!-- Navbar component will be injected here -->
+    <div id="navbar-container"></div>
+
+    <main class="container">
+        <!-- 
+          PAGE HEADER:
+          A clean and inspiring header for the course catalog.
+        -->
+        <header class="courses-header">
+            <h1 class="animate-header">Explore the Academy</h1>
+            <p class="animate-header">Find the perfect learning path to advance your skills and build the future with AI.</p>
+        </header>
+
+        <!-- 
+          FILTER CONTROLS:
+          This section houses the interactive filter buttons. Our JavaScript will manage
+          the 'active' class and use the data-filter attributes to control the grid.
+        -->
+        <section class="filter-controls">
+            <div id="topic-filters" class="filter-group">
+                <!-- Topic filter buttons will be dynamically created here -->
+            </div>
+            <div id="level-filters" class="filter-group">
+                <!-- Skill Level filter buttons will be dynamically created here -->
+            </div>
+        </section>
+
+        <!-- 
+          COURSE GRID:
+          The main container where the filtered list of course cards will be rendered.
+        -->
+        <section id="courses-grid" class="courses-grid">
+            <!-- Course cards will be injected here by JavaScript -->
+        </section>
+
+    </main>
+
+    <footer class="main-footer">
+        <div class="container">
+            <p>© 2024 Nexus Academy. All Rights Reserved.</p>
+        </div>
+    </footer>
+</div>

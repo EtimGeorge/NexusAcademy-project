@@ -15,6 +15,10 @@ const routes = {
     access: "private",
   },
   "/blog": { module: "/src/pages/BlogPage/BlogPage.js", access: "public" },
+  "/courses": {
+    module: "/src/pages/CoursesPage/CoursesPage.js",
+    access: "public",
+  },
 };
 
 // --- ELEMENT REFERENCES ---

@@ -1,0 +1,97 @@
+/* /src/pages/CoursesPage/CoursesPage.css */
+
+/* --- Page Wrapper --- */
+.courses-page-wrapper {
+    background-color: #0B0F19;
+    color: #D1D5DB;
+}
+
+/* --- Page Header --- */
+.courses-header {
+    text-align: center;
+    padding: 4rem 0;
+    border-bottom: 1px solid #374151;
+    margin-bottom: 3rem;
+}
+.courses-header h1 {
+    font-size: 3rem;
+    color: white;
+    margin-bottom: 1rem;
+}
+.courses-header p {
+    font-size: 1.125rem;
+    color: #9CA3AF;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* --- Filter Controls --- */
+.filter-controls {
+    margin-bottom: 3rem;
+    display: flex;
+    flex-direction: column; /* Stack filter groups on mobile */
+    gap: 1.5rem;
+}
+
+.filter-group {
+    display: flex;
+    flex-wrap: wrap; /* Allow buttons to wrap to the next line on small screens */
+    justify-content: center;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.filter-btn {
+    background-color: transparent;
+    border: 1px solid #374151;
+    color: #D1D5DB;
+    padding: 0.5rem 1.25rem;
+    border-radius: 99px; /* Pill shape */
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.filter-btn:hover {
+    background-color: #1D2333;
+    border-color: #9CA3AF;
+    color: white;
+}
+
+.filter-btn.active {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: white;
+}
+
+/* --- Course Grid --- */
+/* This is the main container for the course cards */
+.courses-grid {
+    display: grid;
+    grid-template-columns: 1fr; /* Single column on mobile */
+    gap: 2rem;
+    padding-bottom: 6rem;
+}
+
+
+/* --- DESKTOP RESPONSIVE STYLES --- */
+@media (min-width: 768px) {
+    .courses-header { padding: 5rem 0; }
+    .courses-header h1 { font-size: 4rem; }
+
+    /* On tablets and larger, display filter groups in a row */
+    .filter-controls {
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    /* Create a responsive grid that shows as many columns as will fit */
+    .courses-grid {
+        /* 
+          This is a powerful CSS Grid feature. It creates columns that are at least 320px wide.
+          If there's more space, it will add more columns and distribute the space evenly.
+        */
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    }
+}
