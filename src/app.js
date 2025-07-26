@@ -19,6 +19,10 @@ const routes = {
     module: "/src/pages/CoursesPage/CoursesPage.js",
     access: "public",
   },
+  "/why-nexus": {
+    module: "/src/pages/WhyNexusPage/WhyNexusPage.js",
+    access: "public",
+  },
 };
 
 // --- ELEMENT REFERENCES ---
@@ -106,6 +110,10 @@ const router = async () => {
 
 // --- APPLICATION INITIALIZATION ---
 onAuthStateChanged((user) => {
+  if (user) {
+    console.log("CURRENTLY LOGGED IN USER UID:", user.uid);
+  }
+
   currentUser = user;
   router();
 });

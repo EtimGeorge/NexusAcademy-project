@@ -1,82 +1,244 @@
-// /src/pages/Dashboard/Dashboard.js - FINAL CORRECTED VERSION
+// /src/pages/Dashboard/Dashboard.js - FINAL ENHANCED VERSION
 
-// *** THE FIX IS HERE ***
-// We now use two separate imports to get the correct tools from the correct files.
-import { auth } from '../../services/firebase.js'; // Get the main auth object from firebase.js
-import { logout } from '../../services/auth.js';      // Get the logout function from auth.js
+import { auth } from "../../services/firebase.js";
+import { logout } from "../../services/auth.js";
+import { getEnrolledCourses } from "../../services/db.js";
 
-// We still import our other necessary functions and components
-import { getEnrolledCourses } from '../../services/db.js';
-import { createCourseCard } from '../../components/CourseCard/CourseCard.js';
+// ===================================================================================
+//  MOCK DATA (for Phase 1 of the dashboard)
+//  This simulates the progress data we will later store in Firestore.
+// ===================================================================================
+const mockUserProgress = {
+  "0081JItLJETHm6mWSVF7": {
+    progressPercentage: 66,
+    lastAccessedLesson: "The Universal Prompt Formula",
+  },
+  // In a real scenario with more courses, we would add their IDs and progress here.
+  // e.g., "cm-2": { progressPercentage: 25, lastAccessedLesson: "Advanced Prompting" }
+};
 
-// The render() function is now correct because 'auth.currentUser' will work.
-export function render() {
-    const user = auth.currentUser;
-    const dashboardElement = document.createElement('div');
-    dashboardElement.innerHTML = `
-        <div class="container">
-            <h1>Dashboard</h1>
-            <!-- We can now safely use user.displayName for a better welcome message -->
-            <p>Welcome back, ${user?.displayName || user?.email || 'Guest'}!</p>
-            <button id="logout-btn" class="btn-secondary-link">Logout</button>
-            <div id="courses-section">
-                <h2>My Courses</h2>
-                <div id="courses-grid" class="courses-grid-container">
-                    <p id="loading-message">Loading your courses...</p>
-                </div>
-            </div>
-        </div>
-        <style>
-            .courses-grid-container {
-                display: grid;
-                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-                gap: 1.5rem;
-                margin-top: 1rem;
-            }
-            #courses-section {
-                margin-top: 2rem;
-            }
-            .btn-secondary-link {
-                display: inline-block; padding: 0.75rem 1.5rem; background-color: var(--background-color);
-                color: var(--text-color); border: 1px solid var(--border-color); font-weight: 700;
-                border-radius: 6px; cursor: pointer; margin-top: 1rem;
-            }
-        </style>
-    `;
-    return dashboardElement;
+// ===================================================================================
+//  CORE PAGE LOGIC
+// ===================================================================================
+
+/**
+ * Renders the initial HTML shell for the dashboard.
+ * The content is populated dynamically by the init() function.
+ * @returns {Promise<HTMLElement>} The fully constructed page element.
+ */
+export async function render() {
+  const pageHtml = await (
+    await fetch("/src/pages/Dashboard/Dashboard.html")
+  ).text();
+  const element = document.createElement("div");
+  element.innerHTML = pageHtml;
+  return element;
 }
 
-// The init() function does not need to change. It will now work correctly.
+/**
+ * Initializes all functionality for the dashboard after it's rendered.
+ */
 export async function init() {
-    const logoutBtn = document.getElementById('logout-btn');
-    if (logoutBtn) {
-        logoutBtn.addEventListener('click', async () => {
-            try {
-                await logout();
-            } catch (error) {
-                console.error('Logout failed:', error);
-            }
-        });
-    }
+  const user = auth.currentUser;
+  // This is a safeguard; the main router should prevent unauthenticated access.
+  if (!user) {
+    window.location.hash = "/login";
+    return;
+  }
 
-    const coursesGrid = document.getElementById('courses-grid');
-    const loadingMessage = document.getElementById('loading-message');
-    const user = auth.currentUser;
+  // Initialize all parts of the new dashboard UI
+  initMobileSidebarToggle();
+  renderUserProfile(user);
+  initDashboardNav();
+  renderMainContent(user.uid);
+}
 
-    if (user && coursesGrid) {
-        const enrolledCourses = await getEnrolledCourses(user.uid);
-        
-        if(loadingMessage) {
-            loadingMessage.remove();
+// ===================================================================================
+//  UI RENDERING & LOGIC
+// ===================================================================================
+
+/**
+ * Populates the user profile widget in the sidebar with the user's details.
+ * @param {object} user - The current Firebase user object.
+ */
+function renderUserProfile(user) {
+  const avatarDiv = document.getElementById("user-avatar");
+  const nameHeader = document.getElementById("user-display-name");
+  const emailPara = document.getElementById("user-email");
+
+  if (!avatarDiv || !nameHeader || !emailPara) return;
+
+  nameHeader.textContent = user.displayName || "Nexus Student";
+  emailPara.textContent = user.email;
+
+  if (user.photoURL) {
+    avatarDiv.innerHTML = `<img src="${user.photoURL}" alt="User Avatar">`;
+  } else {
+    // Create avatar with initials if no photo exists
+    const initials = (user.displayName || user.email || "NS")
+      .split(" ")
+      .map((n) => n[0])
+      .join("")
+      .substring(0, 2)
+      .toUpperCase();
+    avatarDiv.textContent = initials;
+  }
+}
+
+/**
+ * Fetches course data and renders the "Continue Learning" and "My Courses" sections.
+ * @param {string} userId - The UID of the current user.
+ */
+async function renderMainContent(userId) {
+  const contentContainer = document.getElementById(
+    "dashboard-content-container"
+  );
+  if (!contentContainer) return;
+
+  const enrolledCourses = await getEnrolledCourses(userId);
+
+  if (enrolledCourses.length === 0) {
+    contentContainer.innerHTML = `<h2>My Learning</h2><p>You are not yet enrolled in any courses. <a href="/#/courses" style="color: var(--primary-color);">Explore our courses</a> to get started.</p>`;
+    return;
+  }
+
+  const continueLearningHtml = renderContinueLearning(enrolledCourses);
+  const myCoursesHtml = renderMyCourses(enrolledCourses);
+
+  contentContainer.innerHTML = `
+        ${continueLearningHtml}
+        ${myCoursesHtml}
+    `;
+
+  initScrollAnimations();
+}
+
+/**
+ * Creates the HTML for the "Continue Learning" section.
+ * @param {Array} courses - The user's enrolled courses.
+ * @returns {string} The HTML string for the section.
+ */
+function renderContinueLearning(courses) {
+  // In a real app, we'd find the course with the most recent 'lastAccessed' timestamp.
+  // For this demo, we'll feature the first course.
+  const lastCourse = courses[0];
+  const progress = mockUserProgress[lastCourse.id] || { progressPercentage: 0 };
+
+  return `
+        <section class="continue-learning-card animate-on-scroll">
+            <h2>Continue Learning</h2>
+            ${createCourseCardHtml(lastCourse, progress)}
+        </section>
+    `;
+}
+
+/**
+ * Creates the HTML for the "My Courses" grid.
+ * @param {Array} courses - The user's enrolled courses.
+ * @returns {string} The HTML string for the section.
+ */
+function renderMyCourses(courses) {
+  return `
+        <section class="my-courses-section">
+            <h2>All My Courses</h2>
+            <div class="my-courses-grid">
+                ${courses
+                  .map((course) => {
+                    const progress = mockUserProgress[course.id] || {
+                      progressPercentage: 0,
+                    };
+                    return createCourseCardHtml(course, progress);
+                  })
+                  .join("")}
+            </div>
+        </section>
+    `;
+}
+
+/**
+ * Creates the HTML for a single course card, including its progress bar.
+ * @param {object} course - The course data object.
+ * @param {object} progress - The progress data for this course.
+ * @returns {string} The HTML string for the card.
+ */
+function createCourseCardHtml(course, progress) {
+  return `
+        <div class="course-card animate-on-scroll">
+            <a href="/#/course/${course.id}" class="course-card-link-wrapper">
+                <div class="course-card-image-container">
+                    <img src="${
+                      course.imageUrl || "https://via.placeholder.com/400x225"
+                    }" alt="${
+    course.title
+  }" class="course-card-image" loading="lazy">
+                </div>
+                <div class="course-card-content">
+                    <h3 class="course-card-title">${course.title}</h3>
+                    <div class="progress-bar">
+                        <div class="progress-bar-inner" style="width: ${
+                          progress.progressPercentage
+                        }%;"></div>
+                    </div>
+                    <p class="progress-text">${
+                      progress.progressPercentage
+                    }% Complete</p>
+                </div>
+            </a>
+        </div>
+    `;
+}
+
+// ===================================================================================
+//  INTERACTIVITY & ANIMATIONS
+// ===================================================================================
+
+/**
+ * Attaches the click listener for the mobile hamburger button to toggle the sidebar.
+ */
+function initMobileSidebarToggle() {
+  const hamburgerBtn = document.getElementById("dashboard-hamburger-btn");
+  const sidebar = document.getElementById("dashboard-sidebar");
+  if (hamburgerBtn && sidebar) {
+    hamburgerBtn.addEventListener("click", () => {
+      hamburgerBtn.classList.toggle("is-active");
+      sidebar.classList.toggle("is-active");
+    });
+  }
+}
+
+/**
+ * Attaches event listeners to dashboard navigation links, including Logout.
+ */
+function initDashboardNav() {
+  const logoutBtn = document.getElementById("logout-btn");
+  if (logoutBtn) {
+    logoutBtn.addEventListener("click", async (e) => {
+      e.preventDefault();
+      try {
+        await logout();
+        window.location.hash = "/login";
+      } catch (error) {
+        console.error("Logout failed:", error);
+      }
+    });
+  }
+}
+
+/**
+ * Initializes scroll animations for elements.
+ */
+function initScrollAnimations() {
+  const animatedElements = document.querySelectorAll(".animate-on-scroll");
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
         }
-
-        if (enrolledCourses && enrolledCourses.length > 0) {
-            enrolledCourses.forEach(course => {
-                const courseCardElement = createCourseCard(course);
-                coursesGrid.appendChild(courseCardElement);
-            });
-        } else {
-            coursesGrid.innerHTML = '<p>You are not yet enrolled in any courses. <a href="/#/courses">Explore Courses</a></p>';
-        }
-    }
+      });
+    },
+    { threshold: 0.1 }
+  );
+  animatedElements.forEach((el) => observer.observe(el));
 }

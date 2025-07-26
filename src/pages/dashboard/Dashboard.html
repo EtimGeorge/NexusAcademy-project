@@ -1,0 +1,66 @@
+<!-- /src/pages/Dashboard/Dashboard.html - NEW LAYOUT -->
+
+<div class="dashboard-wrapper">
+    <!-- Link to the page-specific stylesheet -->
+    <link rel="stylesheet" href="/src/pages/Dashboard/Dashboard.css">
+
+    <!-- 
+      *** NEW: Hamburger Button for Mobile ***
+      This button is placed outside the sidebar so it can be positioned
+      independently and remain visible to toggle the sidebar's visibility.
+      It will only be visible on mobile screens.
+    -->
+    <button class="dashboard-hamburger" id="dashboard-hamburger-btn" aria-label="Toggle Dashboard Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+    
+    <div class="dashboard-layout container">
+        <!-- 
+          DASHBOARD SIDEBAR:
+          This is now the primary navigation for authenticated users.
+          The 'is-active' class will be toggled by JavaScript on mobile.
+        -->
+        <aside class="dashboard-sidebar" id="dashboard-sidebar">
+            <div class="user-profile-widget">
+                <div id="user-avatar" class="user-avatar"></div>
+                <h3 id="user-display-name">Loading...</h3>
+                <p id="user-email">...</p>
+            </div>
+            <nav class="dashboard-nav">
+                <a href="/#/dashboard" class="dashboard-nav-link active">
+                    <span class="nav-icon"></span> <!-- A slightly different Home Icon -->
+                    My Learning
+                </a>
+                <a href="/#/courses" class="dashboard-nav-link">
+                    <span class="nav-icon"></span> <!-- Books Icon -->
+                    All Courses
+                </a>
+                <a href="/#/profile" class="dashboard-nav-link">
+                    <span class="nav-icon"></span> <!-- User Icon -->
+                    My Profile
+                </a>
+                <a href="/#/settings" class="dashboard-nav-link">
+                    <span class="nav-icon">⚙</span> <!-- Gear Icon -->
+                    Settings
+                </a>
+                <!-- Logout Button is now an integrated part of the nav -->
+                <a href="#" id="logout-btn" class="dashboard-nav-link">
+                     <span class="nav-icon"></span> <!-- Exit Icon -->
+                    Logout
+                </a>
+            </nav>
+        </aside>
+
+        <!-- 
+          MAIN CONTENT AREA:
+          This is where the dynamic content (Continue Learning, My Courses) will be rendered.
+        -->
+        <main class="dashboard-main-content">
+            <div id="dashboard-content-container">
+                <div class="page-loader-container"><div class="spinner"></div></div>
+            </div>
+        </main>
+    </div>
+</div>

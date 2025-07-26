@@ -1,0 +1,147 @@
+/* /src/pages/WhyNexusPage/WhyNexusPage.css */
+
+/* --- Page Wrapper --- */
+.why-nexus-wrapper {
+    background-color: #0B0F19;
+    color: #D1D5DB;
+}
+
+/* --- Page Header --- */
+.why-nexus-header {
+    text-align: center;
+    padding: 4rem 0;
+    margin-bottom: 3rem;
+}
+.why-nexus-header h1 {
+    font-size: 3rem;
+    color: white;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+}
+.why-nexus-header p {
+    font-size: 1.25rem;
+    color: #9CA3AF;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+/* --- Features Section --- */
+.features-section {
+    padding-bottom: 3rem;
+}
+
+.feature-row {
+    display: grid;
+    grid-template-columns: 1fr; /* Single column on mobile */
+    gap: 2rem;
+    align-items: center;
+    margin-bottom: 5rem;
+}
+
+.feature-text h2 {
+    font-size: 2rem;
+    color: white;
+    margin-bottom: 1rem;
+}
+.feature-text p {
+    font-size: 1.125rem;
+    line-height: 1.8;
+}
+
+.feature-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    object-fit: cover;
+}
+
+/* --- AI Tutor Showcase Section --- */
+.ai-tutor-section {
+    background: linear-gradient(to bottom, #111827, #0B0F19);
+    padding: 5rem 0;
+    text-align: center;
+}
+.ai-tutor-section .section-title { color: white; }
+.ai-tutor-section .section-subtitle { max-width: 700px; margin: 0 auto 3rem auto; }
+
+.chat-demo-container {
+    max-width: 500px;
+    margin: 0 auto;
+}
+.chat-bubble {
+    padding: 1rem 1.5rem;
+    border-radius: 20px;
+    margin-bottom: 1rem;
+    line-height: 1.6;
+    max-width: 80%;
+}
+.chat-bubble.user {
+    background-color: var(--primary-color);
+    color: white;
+    border-bottom-right-radius: 4px; /* "Tail" for the chat bubble */
+    margin-left: auto; /* Aligns to the right */
+}
+.chat-bubble.ai {
+    background-color: #1D2333;
+    color: #D1D5DB;
+    border-bottom-left-radius: 4px; /* "Tail" for the chat bubble */
+    margin-right: auto; /* Aligns to the left */
+    text-align: left;
+}
+
+/* --- Final CTA Section --- */
+.final-cta {
+    padding: 5rem 0;
+    text-align: center;
+}
+.cta-content {
+    background-color: #111827;
+    padding: 3rem;
+    border-radius: 12px;
+    border: 1px solid #374151;
+}
+.cta-content h2 {
+    font-size: 2.5rem;
+    color: white;
+    margin-bottom: 1rem;
+}
+.cta-content p {
+    font-size: 1.125rem;
+    margin-bottom: 2rem;
+}
+
+
+/* --- DESKTOP RESPONSIVE STYLES --- */
+@media (min-width: 768px) {
+    .why-nexus-header { padding: 5rem 0; }
+    .why-nexus-header h1 { font-size: 4rem; }
+
+    /* Switch to a two-column grid for features on desktop */
+    .feature-row {
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+    }
+
+    /* 
+      This creates the alternating layout.
+      It selects every ODD feature row (1st, 3rd, 5th...) and keeps the text on the left.
+      The default order is text-first.
+    */
+    .feature-row:nth-child(odd) .feature-text {
+        order: 1;
+    }
+    .feature-row:nth-child(odd) .feature-image {
+        order: 2;
+    }
+
+    /* 
+      This selects every EVEN feature row (2nd, 4th, 6th...) and reverses the order,
+      putting the image on the left and the text on the right.
+    */
+    .feature-row:nth-child(even) .feature-text {
+        order: 2;
+    }
+    .feature-row:nth-child(even) .feature-image {
+        order: 1;
+    }
+}
