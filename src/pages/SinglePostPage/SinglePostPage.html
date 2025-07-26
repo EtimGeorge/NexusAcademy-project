@@ -1,37 +1,85 @@
-<!-- /src/pages/SinglePostPage/SinglePostPage.html -->
+<!-- /src/pages/SinglePostPage/SinglePostPage.html - UPDATED FOR INTERACTIVITY -->
 
 <div class="single-post-wrapper">
-  <link rel="stylesheet" href="../src/reset.css">
+  <!-- Preserving existing stylesheets -->
+  <!-- <link rel="stylesheet" href="../src/reset.css"> -->
 
   <link rel="stylesheet" href="../src/pages/HomePage/HomePage.css">
-    <link rel="stylesheet" href="/src/components/Navbar/Navbar.css">
-    <link rel="stylesheet" href="/src/pages/SinglePostPage/SinglePostPage.css">
 
-    <!-- The Navbar component will be injected here -->
-    <div id="navbar-container"></div>
+  <link rel="stylesheet" href="/src/components/Navbar/Navbar.css">
+  <link rel="stylesheet" href="/src/pages/SinglePostPage/SinglePostPage.css">
 
-    <main class="container">
-        <article id="post-content-container">
-            <!-- All post content will be dynamically injected here by JavaScript -->
-            <!-- This provides a placeholder while the content loads -->
-            <div class="page-loader-container"><div class="spinner"></div></div>
-        </article>
+  <div id="navbar-container"></div>
 
-        <!-- 
-          COMMENTS SECTION (Phase 2 Placeholder):
-          We are building the structure for this now. The functionality will be added in our next session.
+  <main class="container">
+    <article id="post-content-container">
+      <!-- All post content will be dynamically injected here by JavaScript -->
+      <div class="page-loader-container">
+        <div class="spinner"></div>
+      </div>
+    </article>
+
+    <!-- 
+          *** NEW: POST ACTIONS WIDGET ***
+          A dedicated section at the end of the article for user actions.
         -->
-        <section id="comments-section" class="container">
-            <h2 class="section-title">Comments</h2>
-            <div class="comments-placeholder">
-                <p>Commenting is coming soon. Join the discussion!</p>
-            </div>
-        </section>
-    </main>
-
-    <footer class="main-footer">
-        <div class="container">
-            <p>© 2024 Nexus Academy. All Rights Reserved.</p>
+    <section id="post-actions-container" class="container">
+      <div class="post-actions-widget">
+        <!-- Liking Widget -->
+        <div class="like-widget">
+          <button id="like-btn" class="like-button" aria-label="Like this post">
+            <!-- Heart SVG Icon -->
+            <svg class="heart-icon" viewBox="0 0 24 24">
+              <path
+                d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+            </svg>
+          </button>
+          <span id="like-count" class="like-count">0</span>
         </div>
-    </footer>
+
+        <!-- Sharing Widget -->
+        <div class="share-widget">
+          <h4 class="share-widget-title">Share:</h4>
+
+          <!-- Desktop-only share buttons -->
+          <div id="desktop-share-buttons" class="share-buttons">
+            <a href="#" class="share-twitter" aria-label="Share on X"><svg viewBox="0 0 24 24">
+                <path
+                  d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+              </svg></a>
+            <a href="#" class="share-facebook" aria-label="Share on Facebook"><svg viewBox="0 0 24 24">
+                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3V2z" />
+              </svg></a>
+            <a href="#" class="share-linkedin" aria-label="Share on LinkedIn"><svg viewBox="0 0 24 24">
+                <path
+                  d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM6 9H2V21h4V9zM4 6a2 2 0 1 0 0-4 2 2 0 0 0 0 4z" />
+              </svg></a>
+            <button id="copy-link-btn" aria-label="Copy link"><svg viewBox="0 0 24 24">
+                <path
+                  d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" />
+              </svg></button>
+          </div>
+
+          <!-- Mobile-only share button (triggers native share) -->
+          <button id="mobile-share-btn" class="btn btn-primary mobile-share-button">Share</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Comments Section Placeholder -->
+    <section id="comments-section" class="container">
+      <h2 class="section-title">Join the Discussion</h2>
+      <div class="comment-form-container">
+        <textarea id="comment-input" placeholder="Add a comment..." disabled></textarea>
+        <button id="comment-submit-btn" class="btn btn-primary" disabled>Submit</button>
+        <p class="comment-notice">Commenting and likes are coming soon!</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="main-footer">
+    <div class="container">
+      <p>© 2024 Nexus Academy. All Rights Reserved.</p>
+    </div>
+  </footer>
 </div>
