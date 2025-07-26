@@ -1,0 +1,37 @@
+<!-- /src/pages/SinglePostPage/SinglePostPage.html -->
+
+<div class="single-post-wrapper">
+  <link rel="stylesheet" href="../src/reset.css">
+
+  <link rel="stylesheet" href="../src/pages/HomePage/HomePage.css">
+    <link rel="stylesheet" href="/src/components/Navbar/Navbar.css">
+    <link rel="stylesheet" href="/src/pages/SinglePostPage/SinglePostPage.css">
+
+    <!-- The Navbar component will be injected here -->
+    <div id="navbar-container"></div>
+
+    <main class="container">
+        <article id="post-content-container">
+            <!-- All post content will be dynamically injected here by JavaScript -->
+            <!-- This provides a placeholder while the content loads -->
+            <div class="page-loader-container"><div class="spinner"></div></div>
+        </article>
+
+        <!-- 
+          COMMENTS SECTION (Phase 2 Placeholder):
+          We are building the structure for this now. The functionality will be added in our next session.
+        -->
+        <section id="comments-section" class="container">
+            <h2 class="section-title">Comments</h2>
+            <div class="comments-placeholder">
+                <p>Commenting is coming soon. Join the discussion!</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container">
+            <p>© 2024 Nexus Academy. All Rights Reserved.</p>
+        </div>
+    </footer>
+</div>

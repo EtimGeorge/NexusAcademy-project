@@ -1,0 +1,7 @@
+<!-- /src/assets/images/logo.svg -->
+<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- This is the main background shape -->
+  <rect width="40" height="40" rx="8" fill="#4F46E5"/>
+  <!-- This is the "N" shape, created with a single path -->
+  <path d="M12 28V12H16.5L23 20.5V12H27V28H22.5L16 19.5V28H12Z" fill="white"/>
+</svg>

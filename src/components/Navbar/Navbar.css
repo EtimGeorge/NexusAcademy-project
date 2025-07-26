@@ -1,0 +1,173 @@
+/* /src/components/Navbar/Navbar.css */
+
+/* --- Main Header Container --- */
+.main-header {
+    /* 
+      This is the core of the sticky functionality.
+      'position: sticky' makes the element stick to the top of the viewport once it scrolls past its initial position.
+      'top: 0' specifies that it should stick at the very top.
+    */
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+
+    /* Ensures the navbar is always on top of other page content */
+    z-index: 1000;
+
+    /* 
+      This creates the visual distinction you requested.
+      The background color has a slight transparency (e.g., 0.8 alpha) and a backdrop-filter
+      blurs the content that scrolls underneath it, creating a professional "glassmorphism" effect.
+    */
+    background-color: rgba(11, 15, 25, 0.8); /* Dark background with 80% opacity */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px); /* For Safari support */
+    
+    /* A subtle border to separate the navbar from the content below it */
+    border-bottom: 1px solid rgba(55, 65, 81, 0.5); /* Semi-transparent border */
+
+    /* Standard flexbox for alignment */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem var(--container-padding); /* Uses global variables from style.css */
+    transition: background-color 0.3s ease;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: white;
+    text-decoration: none;
+    z-index: 10; /* Ensures logo is on top of the mobile nav background */
+}
+
+/* /src/components/Navbar/Navbar.css --  */
+
+/* --- Logo Styles --- */
+.logo-link {
+    display: flex;
+    align-items: center;
+}
+
+.logo-image {
+    height: 40px; /* Controls the height of the logo */
+    width: auto;
+}
+
+
+/* --- Mobile Navigation Menu (Hidden by default) --- */
+.main-nav {
+    /* 
+      This is the container for the links that slides in from the side.
+      It's a fixed element that covers the entire screen.
+    */
+    position: fixed;
+    top: 0;
+    left: -100%; /* Starts off-screen to the left */
+    width: 100%;
+    height: 100vh; /* Full viewport height */
+    
+    background-color: #0B0F19; /* Solid background for the slide-in menu */
+
+    /* Aligns the links in the center of the screen */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    transition: left 0.4s ease-in-out; /* Smooth slide-in/out animation */
+}
+
+/* This class is added by JavaScript to show the menu */
+.main-nav.is-active {
+    left: 0; /* Slides the menu into view */
+}
+
+.main-nav a {
+    color: #D1D5DB;
+    font-size: 1.5rem; /* Larger font size for easy tapping on mobile */
+    font-weight: 500;
+    padding: 1.5rem;
+    text-decoration: none;
+}
+.main-nav a:hover {
+    color: var(--primary-color);
+}
+
+/* Hides the desktop-only "Sign In" button on mobile */
+.nav-cta-desktop {
+    display: none;
+}
+
+
+/* --- Hamburger & Close Button --- */
+.hamburger {
+    /* 
+      This button will toggle the mobile menu. It will be hidden on desktop.
+      It also acts as the "Close" button by transforming into an 'X'.
+    */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 2rem;
+    height: 2rem;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 10; /* Ensures it's on top of the menu */
+}
+
+.hamburger span {
+    width: 2rem;
+    height: 3px;
+    background: white;
+    border-radius: 10px;
+    transition: all 0.3s linear;
+    position: relative;
+    transform-origin: 1px;
+}
+
+/* Animation for the hamburger turning into an 'X' */
+.hamburger.is-active span:nth-child(1) {
+    transform: rotate(45deg);
+}
+.hamburger.is-active span:nth-child(2) {
+    opacity: 0;
+    transform: translateX(20px);
+}
+.hamburger.is-active span:nth-child(3) {
+    transform: rotate(-45deg);
+}
+
+
+/* --- Desktop Styles --- */
+@media (min-width: 768px) {
+    /* Resets the mobile nav styles for larger screens */
+    .main-nav {
+        position: static;
+        width: auto;
+        height: auto;
+        background: transparent;
+        flex-direction: row;
+        transition: none;
+    }
+    
+    .main-nav a {
+        font-size: 1rem; /* Return to normal font size */
+        padding: 0;
+        margin-left: 2rem;
+    }
+
+    /* Hides the hamburger and shows the desktop CTA */
+    .hamburger {
+        display: none;
+    }
+    .nav-cta-desktop {
+        display: inline-block;
+    }
+}
+
+/* This file is now complete and robust. Please review it. Once you are satisfied, prompt me to continue, and I will provide the next file: `/src/components/Navbar/Navbar.html`. */

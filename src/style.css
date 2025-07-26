@@ -1,0 +1,162 @@
+/* 
+  This is our global stylesheet. It uses the CSS variables defined in our UI/UX Design document.
+  Using variables means if we want to change our brand color, we only have to change it in ONE place.
+*/
+
+:root {
+  /* Color Palette */
+  --primary-color: #4F46E5;
+  --text-color: #111827;
+  --text-secondary-color: #6B7280;
+  --background-color: #FFFFFF;
+  --background-subtle-color: #F9FAFB;
+  --success-color: #10B981;
+  --error-color: #EF4444;
+  --border-color: #E5E7EB;
+
+  /* Typography */
+  --font-family: 'Inter', sans-serif;
+  --header-font-weight: 700;
+  --body-font-weight: 400;
+
+  /* Layout */
+  --container-padding: 1.5rem; /* 24px */
+  --container-max-width: 1280px;
+}
+
+/* 
+  Apply base styles to the entire document.
+  This sets the default font, background color, and text color.
+*/
+body {
+  font-family: var(--font-family);
+  font-weight: var(--body-font-weight);
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+/* /src/style.css -- ADD THIS AT THE END */
+
+/* --- Page Loader Styles --- */
+
+.page-loader-container {
+  /* This makes the loader cover the entire screen */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  
+  /* A semi-transparent background to dim the page content */
+  background-color: rgba(255, 255, 255, 0.8);
+  
+  /* Use flexbox to perfectly center the spinner inside */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* Make sure it's on top of all other content */
+  z-index: 9999;
+  
+  /* Smooth transition for when we hide it */
+  transition: opacity 0.3s ease;
+}
+
+.spinner {
+  /* The visual appearance of the spinner circle */
+  width: 50px;
+  height: 50px;
+  border: 5px solid rgba(0, 0, 0, 0.1);
+  border-left-color: var(--primary-color); /* The spinning part is our brand color */
+  border-radius: 50%;
+  
+  /* The animation that makes it spin */
+  animation: spin 1s linear infinite;
+}
+
+/* We will add this class with JavaScript to hide the loader */
+.page-loader-container.hidden {
+  opacity: 0;
+  /* This prevents the hidden loader from capturing mouse clicks */
+  pointer-events: none;
+}
+
+/* The CSS animation keyframes for the spinning motion */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* 
+  A reusable utility class to constrain and center content.
+  We will use this on all of our pages.
+*/
+.container {
+  width: 100%;
+  max-width: var(--container-max-width);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--container-padding);
+  padding-right: var(--container-padding);
+}
+
+/* Base styles for headings */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: var(--header-font-weight);
+  line-height: 1.2;
+}
+
+h1 { font-size: 2.25rem; } /* 36px */
+h2 { font-size: 1.875rem; } /* 30px */
+h3 { font-size: 1.5rem; } /* 24px */
+
+p {
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+/* /src/style.css -- ADD THIS AT THE END */
+
+/* --- New Button Styles --- */
+.btn {
+  display: inline-block;
+  padding: 0.8rem 2rem;
+  font-weight: 700;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+.btn-primary {
+  background-color: var(--primary-color);
+  color: white;
+}
+.btn-secondary {
+  background-color: white;
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+}
+
+/* --- Section Padding Utility --- */
+.section {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+.section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+.section-subtitle {
+    text-align: center;
+    font-size: 1.125rem;
+    color: var(--text-secondary-color);
+    max-width: 600px;
+    margin: 0 auto 4rem auto;
+}

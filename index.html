@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus Academy | Where Human Ingenuity Meets Artificial Intelligence</title>
+    <!-- Link to Google Fonts for the 'Inter' font -->
+
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- These paths MUST be relative to index.html -->
+    <link rel="stylesheet" href="src/reset.css">
+    <link rel="stylesheet" href="src/style.css">
+</head>
+<body>
+
+     <!-- *** ADD THIS NEW ELEMENT *** -->
+    <!-- This is our page loader. It's visible on initial load. -->
+    <div id="page-loader" class="page-loader-container">
+        <div class="spinner"></div>
+    </div>
+    
+    <main id="root"></main>
+
+    <!-- This path MUST be relative to index.html -->
+    <script type="module" src="src/app.js"></script>
+</body>
+</html>

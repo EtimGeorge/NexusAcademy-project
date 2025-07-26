@@ -1,0 +1,85 @@
+<!-- /src/pages/BlogPage/BlogPage.html - CORRECTED LAYOUT -->
+
+<div class="blog-page-wrapper">
+    <!-- Preserving your existing stylesheets -->
+    <!-- <link rel="stylesheet" href="/src/reset.css"> -->
+    <link rel="stylesheet" href="../src/pages/HomePage/HomePage.css">
+    <link rel="stylesheet" href="/src/components/Navbar/Navbar.css">
+    <link rel="stylesheet" href="/src/pages/BlogPage/BlogPage.css">
+
+    <div id="navbar-container"></div>
+
+    <main>
+        <div class="container">
+            <header class="blog-header">
+                <h1 class="animate-header">The Nexus Pulse</h1>
+                <p class="animate-header">Analysis, tutorials, and insights on the cutting edge of AI. Your essential resource for staying ahead.</p>
+            </header>
+
+            <div class="blog-layout">
+                <aside class="blog-sidebar">
+                    <!-- Search Widget is now first for prominence -->
+                    <div class="sidebar-widget animate-on-scroll">
+                        <h3 class="widget-title">Search Articles</h3>
+                        <div class="search-widget-container">
+                            <input type="search" id="blog-search-input" placeholder="e.g., 'Kling vs Sora'">
+                        </div>
+                    </div>
+
+                    <!-- Categories Widget -->
+                    <div class="sidebar-widget animate-on-scroll">
+                        <h3 class="widget-title">Categories</h3>
+                        <ul id="category-list" class="category-list">
+                            <li><a href="#" class="active" data-category="All Posts">All Posts</a></li>
+                            <li><a href="#" data-category="Tool Spotlight">Tool Spotlight</a></li>
+                            <li><a href="#" data-category="Workflow Wednesday">Workflow Wednesday</a></li>
+                            <li><a href="#" data-category="Future Forward">Future Forward</a></li>
+                            <li><a href="#" data-category="Productivity">Productivity</a></li>
+                        </ul>
+                    </div>
+
+                     <!-- *** NEW: NEWSLETTER WIDGET *** -->
+                  <div class="sidebar-widget animate-on-scroll">
+                      <h3 class="widget-title">Subscribe to Nexus</h3>
+                      <div id="newsletter-widget-container" class="newsletter-widget-container">
+                          <p>Get the latest AI news and tutorials delivered to your inbox.</p>
+                          <form id="newsletter-form" class="newsletter-form">
+                              <input type="email" id="newsletter-email" placeholder="Your email address" required>
+                              <button type="submit" class="btn btn-primary">Subscribe</button>
+                          </form>
+                      </div>
+                  </div>
+
+                  <!-- *** NEW: POPULAR COURSES WIDGET *** -->
+                  <div class="sidebar-widget animate-on-scroll">
+                      <h3 class="widget-title">Popular Courses</h3>
+                      <ul id="popular-courses-list" class="popular-courses-list">
+                          <!-- Course links will be injected here by JavaScript -->
+                      </ul>
+                  </div>
+
+                    <!-- Newsletter and Popular Courses will follow -->
+                </aside>
+                
+                <section class="blog-posts-grid-container">
+                    <!-- *** THE FEATURED POST IS NOW HERE *** -->
+                    <!-- It's the first item in the main content area -->
+                    <div id="featured-post-container" class="featured-post-wrapper">
+                        <!-- The featured post card will be injected here by JavaScript -->
+                    </div>
+
+                    <!-- The grid for all other posts follows -->
+                    <div id="blog-posts-grid" class="posts-grid">
+                        <!-- All non-featured blog post cards will be injected here -->
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container">
+            <p>© 2024 Nexus Academy. All Rights Reserved.</p>
+        </div>
+    </footer>
+</div>

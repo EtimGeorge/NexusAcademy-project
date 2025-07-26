@@ -1,0 +1,30 @@
+/* A simple, modern CSS reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+body, h1, h2, h3, h4, p, figure, blockquote, dl, dd {
+  margin: 0;
+}
+ul, ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+html {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+body {
+  min-height: 100vh;
+}
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+}
+input, button, textarea, select {
+  font: inherit;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}

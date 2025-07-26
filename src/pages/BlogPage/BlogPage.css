@@ -1,0 +1,298 @@
+/* /src/pages/BlogPage/BlogPage.css - UPDATED FOR NEW WIDGETS & LAYOUT */
+
+/* --- Page Wrapper & Main Layout --- */
+.blog-page-wrapper {
+  background-color: #0b0f19;
+  color: #d1d5db;
+}
+.blog-layout {
+  display: grid;
+  grid-template-areas:
+    "sidebar"
+    "posts";
+  gap: 2rem;
+  padding-bottom: 6rem;
+}
+
+/* --- Page Header (No changes) --- */
+.blog-header {
+  text-align: center;
+  padding: 4rem 0;
+  border-bottom: 1px solid #374151;
+  margin-bottom: 2rem;
+}
+.blog-header h1 {
+  font-size: 3rem;
+  color: white;
+  margin-bottom: 1rem;
+}
+.blog-header p {
+  font-size: 1.125rem;
+  color: #9ca3af;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* --- Sidebar & New Widgets --- */
+.blog-sidebar {
+  grid-area: sidebar;
+}
+.sidebar-widget {
+  background-color: #111827;
+  border: 1px solid #374151;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+}
+.widget-title {
+  font-size: 1.125rem;
+  color: white;
+  padding: 1.5rem;
+  border-bottom: 1px solid #374151;
+}
+.category-list {
+  padding: 1rem;
+}
+.category-list li a {
+  display: block;
+  padding: 0.75rem 1rem;
+  color: #d1d5db;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+.category-list li a:hover {
+  background-color: #1d2333;
+}
+.category-list li a.active {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+/* Styles for the new Search Widget */
+.search-widget-container {
+  padding: 1.5rem;
+}
+#blog-search-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background-color: #1d2333;
+  border: 1px solid #374151;
+  border-radius: 8px;
+  color: white;
+  font-size: 1rem;
+}
+#blog-search-input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+}
+
+/* Styles for the new Newsletter Widget */
+.newsletter-widget-container {
+  padding: 1.5rem;
+}
+.newsletter-widget-container p {
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+.newsletter-form input {
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 8px;
+  border: 1px solid #374151;
+  background-color: #1d2333;
+  color: white;
+  margin-bottom: 1rem;
+}
+.newsletter-form button {
+  width: 100%;
+}
+
+/* Styles for the new Popular Courses Widget */
+.popular-courses-list {
+  padding: 1rem;
+}
+.popular-course-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #374151;
+}
+.popular-course-item:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+.popular-course-item img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+.popular-course-item-info h4 {
+  color: white;
+  font-size: 1rem;
+  margin-bottom: 0.25rem;
+}
+.popular-course-item-info p {
+  font-size: 0.875rem;
+  color: #9ca3af;
+}
+
+/* --- Main Content Grid --- */
+.blog-posts-grid-container {
+  grid-area: posts;
+}
+
+/* --- Featured Post Wrapper --- */
+.featured-post-wrapper {
+  margin-bottom: 3rem;
+}
+/* On desktop, the featured card's title will be larger */
+.featured-post-wrapper .blog-card-title {
+  font-size: 2rem;
+}
+
+/* --- Standard Posts Grid --- */
+.posts-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+/* --- Blog Post Grid --- */
+.blog-posts-grid-container {
+  grid-area: posts;
+}
+.posts-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+/* 
+  --- THE NEW BLOG CARD - Designed to feel "Alive" --- 
+*/
+.blog-card {
+  background-color: #111827;
+  border: 1px solid #374151; /* The "frame-like" border you requested */
+  border-radius: 12px;
+  text-decoration: none;
+  display: block;
+  color: inherit;
+  overflow: hidden; /* Important for the image zoom effect */
+
+  /* 
+      This is the core of the "alive" feeling.
+      We set up smooth transitions for multiple properties.
+    */
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+/* 
+  This is the interactive state. On hover, the card "lifts up,"
+  gets a glowing shadow, and the border color changes to our primary brand color.
+*/
+.blog-card:hover {
+  transform: translateY(-8px); /* Lifts the card up */
+  border-color: var(--primary-color);
+  box-shadow: 0 10px 40px rgba(79, 70, 229, 0.2); /* Adds a subtle brand-colored glow */
+}
+
+.blog-card-image-container {
+  display: block;
+  overflow: hidden; /* Hides the part of the image that scales outside the container */
+  aspect-ratio: 16 / 9;
+}
+.blog-card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease; /* Slower, smoother zoom for the image */
+}
+/* The image zooms in slightly when the card is hovered */
+.blog-card:hover .blog-card-image {
+  transform: scale(1.05);
+}
+
+.blog-card-content {
+  padding: 1.5rem;
+  /* This separator line adds to the "framed" feel inside the card */
+  border-top: 1px solid #374151;
+}
+
+.blog-card-category {
+  color: var(--primary-color);
+  font-size: 0.875rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+.blog-card-title {
+  font-size: 1.375rem;
+  color: white;
+  line-height: 1.4;
+  margin-bottom: 0.75rem;
+}
+.blog-card-date {
+  font-size: 0.875rem;
+  color: #9ca3af;
+}
+
+/* The featured card in the sidebar uses the same hover effects */
+.featured-card {
+  background-color: #1d2333;
+  border: 1px solid #374151;
+  border-radius: 8px;
+  padding: 1rem;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.featured-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--primary-color);
+  box-shadow: 0 5px 20px rgba(79, 70, 229, 0.15);
+}
+.featured-card-image-container {
+  flex-shrink: 0;
+  width: 60px;
+  height: 60px;
+  border-radius: 6px;
+  overflow: hidden;
+}
+.featured-card-content h4 {
+  color: white;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  margin-bottom: 0.25rem;
+}
+.featured-card-content p {
+  font-size: 0.875rem;
+  color: #9ca3af;
+}
+
+/* --- DESKTOP RESPONSIVE STYLES --- */
+@media (min-width: 768px) {
+  .posts-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .blog-header {
+    padding: 5rem 0;
+  }
+  .blog-header h1 {
+    font-size: 4rem;
+  }
+
+  .blog-layout {
+    grid-template-areas: "posts sidebar"; /* Sidebar on the right for desktop */
+    grid-template-columns: 1fr 320px; /* Flexible main content, fixed sidebar */
+    gap: 4rem;
+  }
+}

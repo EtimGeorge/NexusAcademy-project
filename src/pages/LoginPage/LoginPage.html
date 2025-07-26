@@ -1,0 +1,35 @@
+<!-- /src/pages/LoginPage/LoginPage.html -->
+<div class="login-container">
+    <div class="login-box">
+        <h1 class="login-title">Welcome to Nexus Academy</h1>
+        <p class="login-subtitle">Sign in to access your dashboard.</p>
+
+        <!-- Error message container, initially hidden -->
+        <div id="error-message" class="error-banner" style="display: none;"></div>
+
+        <form id="login-form">
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" required>
+            </div>
+            <button type="submit" class="btn-primary">Sign In</button>
+        </form>
+
+        <div class="divider">or</div>
+
+        <button id="google-login-btn" class="btn-secondary">
+            <!-- You will need to add a real google icon svg to this path -->
+            <img src="/src/assets/images/google-icon.svg" alt="Google icon" class="google-icon" />
+            Continue with Google
+        </button>
+        
+        <p class="signup-link">
+            Don't have an account? <a href="/#/signup">Sign Up</a>
+        </p>
+    </div>
+</div>
+<link rel="stylesheet" href="/src/pages/LoginPage/LoginPage.css">

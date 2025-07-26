@@ -1,0 +1,196 @@
+/* /src/pages/HomePage/HomePage.css */
+
+/* --- Page-wide Wrapper --- */
+.home-page-wrapper {
+    /* Sets the dark background for the entire page */
+    background-color: #0B0F19; 
+    color: #F9FAFB; /* Sets the default text color to a light off-white */
+    overflow-x: hidden; /* Prevents horizontal scrollbars during animations */
+}
+
+/* --- Hero Section --- */
+.hero {
+    text-align: center;
+    padding: 4rem 0; /* Vertical padding for mobile */
+    position: relative; /* Required for the pseudo-element gradient effect */
+}
+
+/* 
+  This pseudo-element creates the large, radial gradient behind the hero text,
+  giving it a modern "glow" effect without adding extra HTML elements.
+*/
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    /* Centers the gradient and moves it up */
+    transform: translate(-50%, -50%); 
+    width: 100%;
+    max-width: 800px;
+    height: 800px;
+    background-image: radial-gradient(circle, rgba(79, 70, 229, 0.3), transparent 60%);
+    z-index: 0; /* Places the gradient behind the hero content */
+}
+
+/* This container ensures the text and buttons appear on top of the gradient */
+.hero-content {
+    position: relative;
+    z-index: 1;
+}
+
+.hero-title {
+    font-size: 2.5rem; /* Font size for mobile */
+    line-height: 1.2;
+    color: white;
+    margin-bottom: 1rem;
+}
+
+.hero-slogan {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--primary-color);
+    margin: 0 auto 1.5rem auto;
+    max-width: 500px;
+}
+
+.hero-subtitle {
+    font-size: 1.1rem;
+    color: #D1D5DB; /* A lighter gray for better readability on the dark background */
+    max-width: 600px;
+    margin: 0 auto 2.5rem auto;
+}
+
+/* Initial state for all hero elements that will be animated by JavaScript */
+.animate-hero {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+
+/* --- Grid Layouts for Sections --- */
+/* A single-column layout for mobile */
+.courses-grid,
+.features-grid,
+.testimonials-grid,
+.blog-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+}
+
+
+/* --- Section-Specific Styles --- */
+.why-us-section {
+    /* A slightly different shade of dark blue to create separation */
+    background-color: #111827;
+}
+
+.feature-card {
+    background-color: #1D2333;
+    padding: 2rem;
+    border: 1px solid #374151;
+    border-radius: 12px;
+}
+.feature-card h3 {
+    color: white;
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+}
+.feature-card p {
+    color: #9CA3AF;
+    margin-bottom: 0;
+}
+
+/* Testimonial Card Styles */
+.testimonial-card {
+    background-color: #1D2333;
+    padding: 2rem;
+    border-radius: 12px;
+    border: 1px solid #374151;
+    text-align: left;
+    height: 100%; /* Ensures cards in a row have the same height */
+}
+.testimonial-quote {
+    font-style: italic;
+    color: #D1D5DB;
+    margin-bottom: 1.5rem;
+}
+.testimonial-author { display: flex; align-items: center; }
+.author-image { width: 50px; height: 50px; border-radius: 50%; object-fit: cover; margin-right: 1rem; }
+.author-name { color: white; font-weight: 700; }
+.author-title { color: #9CA3AF; font-size: 0.875rem; }
+
+/* Blog Card Styles */
+.blog-post-card {
+    background-color: #1D2333;
+    border: 1px solid #374151;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.3s;
+    text-decoration: none;
+    display: block;
+}
+.blog-post-card:hover { transform: translateY(-5px); }
+.blog-post-card-content { padding: 1.5rem; }
+.blog-post-card-category { color: var(--primary-color); font-size: 0.875rem; font-weight: 700; margin-bottom: 0.5rem; }
+.blog-post-card-title { color: white; font-size: 1.25rem; margin-bottom: 1rem; }
+.blog-post-card-date { color: #9CA3AF; font-size: 0.875rem; }
+
+/* --- Final CTA Section --- */
+#cta {
+    text-align: center;
+    /* Creates a nice fade-in effect from the footer color */
+    background: linear-gradient(to top, #111827, #0B0F19);
+}
+#cta .btn {
+    background-color: white;
+    color: var(--primary-color);
+    font-size: 1.125rem;
+    padding: 1rem 2.5rem;
+}
+
+/* --- Footer --- */
+.main-footer {
+    text-align: center;
+    padding: 3rem 0;
+    border-top: 1px solid #374151;
+    background-color: #111827; /* Darker shade for the footer */
+}
+.main-footer p {
+    margin: 0;
+    color: #9CA3AF;
+}
+
+/* --- Animation Utility Class --- */
+/* This is the initial state for elements that will fade in on scroll */
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+/* This class is added by JavaScript when the element is visible */
+.animate-on-scroll.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+/* --- DESKTOP RESPONSIVE STYLES --- */
+/* Using min-width means these styles apply only to screens larger than the specified size */
+
+@media (min-width: 768px) {
+    .hero { padding: 8rem 0; }
+    .hero-title { font-size: 4rem; }
+    .hero-subtitle { font-size: 1.25rem; }
+
+    /* Switch to multi-column layouts */
+    .courses-grid, .testimonials-grid { grid-template-columns: repeat(2, 1fr); }
+    .features-grid { grid-template-columns: repeat(3, 1fr); }
+    .blog-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 1024px) {
+    /* Use a 3-column layout for the main sections on larger desktop screens */
+    .courses-grid, .blog-grid { grid-template-columns: repeat(3, 1fr); }
+}

@@ -1,0 +1,125 @@
+<!-- /src/pages/HomePage/HomePage.html -->
+
+<!-- This div acts as a main wrapper for the entire page, allowing us to set page-wide styles like the dark background. -->
+<div class="home-page-wrapper">
+
+    <!-- 
+      These links ensure that the specific styles for this page and its components are loaded.
+      The browser will fetch these CSS files when this HTML is injected into the DOM.
+    -->
+    <link rel="stylesheet" href="/src/components/Navbar/Navbar.css">
+    <link rel="stylesheet" href="/src/components/CourseCard/CourseCard.css">
+    <link rel="stylesheet" href="/src/pages/HomePage/HomePage.css">
+
+    <!-- 
+      This container is a placeholder. Our HomePage.js script will fetch and inject 
+      the Navbar.html component into this div.
+    -->
+    <div id="navbar-container"></div>
+
+    <main>
+        <!-- 
+          HERO SECTION:
+          This is the first thing a visitor sees. Its purpose is to grab attention,
+          state our brand promise, and provide a clear primary Call to Action (CTA).
+        -->
+        <section class="container hero">
+            <div class="hero-content">
+                <h1 class="hero-title animate-hero">The Gap Between Knowing and Doing is Closing.</h1>
+                <p class="hero-slogan animate-hero">Nexus Academy: Where Human Ingenuity Meets Artificial Intelligence.</p>
+                <p class="hero-subtitle animate-hero">Stop watching tutorials. Start building real-world AI solutions. Our hands-on courses and AI-powered tutor will guide you from concept to creation.</p>
+                <a href="/#/signup" class="btn btn-primary animate-hero">Start Building Now</a>
+            </div>
+        </section>
+
+        <!-- 
+          FEATURED COURSES SECTION:
+          This section immediately presents our core products as the solution.
+          The 'courses-grid' div will be populated by HomePage.js with our featured course data.
+        -->
+        <section id="courses" class="section">
+            <div class="container">
+                <div class="animate-on-scroll">
+                    <h2 class="section-title">Become an Architect of the Future</h2>
+                    <p class="section-subtitle">Our curriculum is designed to give you practical, portfolio-ready skills. Find the track that fits your goals.</p>
+                </div>
+                <div class="courses-grid">
+                    <!-- Course cards will be dynamically injected here by JavaScript -->
+                </div>
+            </div>
+        </section>
+        
+        <!-- 
+          WHY US / DIFFERENTIATORS SECTION:
+          This section answers the question "Why should I choose you?". It highlights our key unique selling points.
+          The 'features-grid' will be populated by HomePage.js.
+        -->
+        <section id="why-us" class="section why-us-section">
+            <div class="container">
+                 <div class="animate-on-scroll">
+                    <h2 class="section-title">An Education That Evolves</h2>
+                    <p class="section-subtitle">The world of AI changes every week. Your education should too. We've redesigned learning for the new era of intelligent tools.</p>
+                </div>
+                <div class="features-grid">
+                    <!-- "Why Nexus" feature cards will be injected here by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- 
+          TESTIMONIALS SECTION:
+          This section builds trust and social proof.
+          The grid here will be populated by HomePage.js with student testimonials.
+        -->
+        <section id="testimonials" class="section">
+            <div class="container">
+                <div class="animate-on-scroll">
+                    <h2 class="section-title">From Our Students</h2>
+                    <p class="section-subtitle">Don't just take our word for it. Here's what our students are saying about their transformation at Nexus Academy.</p>
+                </div>
+                <div class="testimonials-grid">
+                    <!-- Testimonial cards will be injected here by JavaScript -->
+                </div>
+            </div>
+        </section>
+        
+        <!-- 
+          BLOG PREVIEW SECTION:
+          This section establishes our authority and provides ongoing value.
+          The grid will be populated with the latest posts by HomePage.js.
+        -->
+        <section id="blog" class="section why-us-section">
+             <div class="container">
+                <div class="animate-on-scroll">
+                    <h2 class="section-title">The Nexus Pulse</h2>
+                    <p class="section-subtitle">Our primary engine for insights. Read the latest analysis, tool reviews, and workflow tutorials from our team.</p>
+                </div>
+                <div class="blog-grid">
+                    <!-- Blog post preview cards will be injected here by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- 
+          FINAL CALL TO ACTION (CTA) SECTION:
+          A final, focused section to encourage the user to enroll.
+        -->
+        <section id="cta" class="section">
+            <div class="container animate-on-scroll">
+                <h2 class="section-title">Ready to Build?</h2>
+                <p class="section-subtitle">Your first steps into the world of AI creation are just a click away.</p>
+                <a href="/#/signup" class="btn">Enroll in the Academy</a>
+            </div>
+        </section>
+    </main>
+
+    <!-- 
+      FOOTER:
+      Standard site footer with copyright information.
+    -->
+    <footer class="main-footer">
+        <div class="container">
+            <p>© 2024 Nexus Academy. All Rights Reserved.</p>
+        </div>
+    </footer>
+</div>

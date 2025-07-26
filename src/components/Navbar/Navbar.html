@@ -1,0 +1,29 @@
+<!-- /src/components/Navbar/Navbar.html - UPDATED WITH LOGO -->
+
+<header class="main-header container">
+    
+    <!-- 
+      The Logo:
+      This is now an anchor tag containing an <img> element.
+      Using an 'img' tag allows us to easily control the size and styling.
+      The 'alt' attribute is crucial for accessibility.
+    -->
+    <a href="/#/" class="logo-link" aria-label="Nexus Academy Home">
+        <img src="/src/assets/images/logo.svg" alt="Nexus Academy Logo" class="logo-image">
+    </a>
+    
+    <!-- The rest of the nav structure remains the same -->
+    <nav class="main-nav" id="main-nav-links">
+        <a href="/#/courses">Courses</a>
+        <a href="/#/blog">Blog</a>
+        <a href="#why-us">Why Nexus</a>
+        <a href="/#/login" class="nav-cta-desktop btn btn-secondary">Sign In</a>
+    </nav>
+    
+    <button class="hamburger" id="hamburger-btn" aria-label="Toggle Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+    
+</header>
