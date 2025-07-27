@@ -1,0 +1,136 @@
+/* /src/pages/SettingsPage/SettingsPage.css - COMPREHENSIVE VERSION */
+
+/* --- Page Content Wrapper --- */
+.settings-page-content {
+    animation: fadeIn 0.5s ease-in-out;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Page Header --- */
+.settings-header {
+    margin-bottom: 2rem;
+}
+.settings-header h1 {
+    font-size: 2rem;
+    color: white;
+    margin-bottom: 0.5rem;
+}
+.settings-header p {
+    font-size: 1rem;
+    color: #9CA3AF;
+}
+
+/* --- General Settings Card --- */
+.settings-card {
+    background-color: #111827;
+    border: 1px solid #374151;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+}
+.settings-card h2 {
+    font-size: 1.5rem;
+    color: white;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #374151;
+}
+
+/* --- Form Styles --- */
+.form-divider {
+    border: none;
+    border-top: 1px solid #374151;
+    margin: 2rem 0;
+}
+.form-group { margin-bottom: 1.5rem; }
+.form-group label { display: block; font-weight: 500; color: #D1D5DB; margin-bottom: 0.75rem; }
+.form-group input, .form-group select {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background-color: #1D2333;
+    border: 1px solid #374151;
+    border-radius: 8px;
+    color: white;
+    font-size: 1rem;
+    transition: border-color 0.2s;
+}
+.form-group input:focus, .form-group select:focus { outline: none; border-color: var(--primary-color); }
+.form-group small { display: block; margin-top: 0.5rem; font-size: 0.875rem; color: #9CA3AF; }
+.form-actions { display: flex; align-items: center; gap: 1.5rem; margin-top: 1rem; }
+
+
+/* --- Payment Methods Card --- */
+.payment-provider-logos {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #374151;
+}
+.payment-provider-logos img {
+    height: 24px; /* Uniform height for all logos */
+    filter: grayscale(1) opacity(0.7); /* Subtle, uniform look */
+    transition: filter 0.2s;
+}
+.payment-provider-logos img:hover {
+    filter: grayscale(0) opacity(1);
+}
+.payment-intro-text {
+    color: #9CA3AF;
+    font-size: 0.875rem;
+    margin-bottom: 2rem;
+}
+.payment-method-row, .danger-zone-row {
+    display: flex;
+    flex-direction: column; /* Stack on mobile */
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+}
+.payment-info h4, .danger-info h4 {
+    color: white;
+    font-size: 1.125rem;
+    margin-bottom: 0.25rem;
+}
+.payment-info p, .danger-info p {
+    color: #9CA3AF;
+    margin: 0;
+}
+
+
+/* --- Danger Zone --- */
+.danger-zone {
+    border-color: #991B1B; /* Red border to signify danger */
+}
+.danger-zone h2 {
+    color: #F87171; /* Red text for the header */
+}
+.btn.btn-danger {
+    background-color: #DC2626;
+    color: white;
+}
+.btn.btn-danger:hover {
+    background-color: #B91C1C;
+}
+
+
+/* --- DESKTOP RESPONSIVE STYLES --- */
+@media (min-width: 768px) {
+    .settings-card { padding: 2.5rem; }
+    
+    .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+    }
+    
+    .payment-method-row, .danger-zone-row {
+        flex-direction: row; /* Side-by-side layout on desktop */
+        align-items: center;
+    }
+}

@@ -1,0 +1,101 @@
+<!-- /src/pages/SettingsPage/SettingsPage.html - REVISED WITH LOCAL PAYMENT PROVIDERS -->
+
+<div class="settings-page-content">
+  <link rel="stylesheet" href="/src/pages/SettingsPage/SettingsPage.css" />
+
+  <header class="settings-header">
+    <h1>Account Settings</h1>
+    <p>Manage your account security, payment methods, and preferences.</p>
+  </header>
+
+  <!-- Security Card (No changes) -->
+  <div class="settings-card">
+    <h2>Security</h2>
+    <form id="change-password-form">
+      <div class="form-group">
+        <label for="current-password">Current Password</label>
+        <input type="password" id="current-password" required autocomplete="current-password" />
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="new-password">New Password</label>
+          <input type="password" id="new-password" required autocomplete="new-password" />
+        </div>
+        <div class="form-group">
+          <label for="confirm-new-password">Confirm New Password</label>
+          <input type="password" id="confirm-new-password" required autocomplete="new-password" />
+        </div>
+      </div>
+      <div class="form-actions">
+        <button type="submit" id="change-password-btn" class="btn btn-primary">
+          Update Password
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- *** REVISED: Payment Methods Card *** -->
+  <div class="settings-card">
+    <h2>Payment Methods</h2>
+    <div class="payment-provider-logos">
+      <!-- We will add small logos for each provider to build trust -->
+      <img src="/src/assets/images/paystack-logo.svg" alt="Paystack" />
+      <img src="/src/assets/images/flutterwave-logo.svg" alt="Flutterwave" />
+      <img src="/src/assets/images/paypal-logo.svg" alt="PayPal" />
+      <img src="/src/assets/images/opay-logo.svg" alt="OPay" />
+      <!-- Add other logos as needed -->
+    </div>
+    <p class="payment-intro-text">
+      We partner with industry-leading, secure payment gateways. Manage your
+      saved card details through our primary provider, Paystack.
+    </p>
+    <div class="payment-method-row">
+      <div class="payment-info">
+        <h4>Card Details</h4>
+        <p>Add or remove credit and debit cards securely.</p>
+      </div>
+      <button id="manage-billing-btn" class="btn btn-secondary">
+        Manage on Paystack
+      </button>
+    </div>
+    <hr class="form-divider" />
+    <div class="form-group">
+      <label for="crypto-wallet">Your Crypto Wallet Address (Optional)</label>
+      <input type="text" id="crypto-wallet" placeholder="0x..." />
+      <small>For future features like NFT-gated content and certificate
+        verification.</small>
+    </div>
+  </div>
+
+  <!-- Preferences Card (No changes) -->
+  <div class="settings-card">
+    <h2>Preferences</h2>
+    <div class="form-group">
+      <label for="currency-select">Preferred Currency</label>
+      <select id="currency-select">
+        <option value="NGN">NGN - Nigerian Naira</option>
+        <option value="USD">USD - US Dollar</option>
+        <option value="GBP">GBP - British Pound</option>
+        <option value="EUR">EUR - Euro</option>
+      </select>
+      <small>This will update how prices are displayed across the site.</small>
+    </div>
+  </div>
+
+  <!-- Danger Zone Card (No changes) -->
+  <div class="settings-card danger-zone">
+    <h2>Danger Zone</h2>
+    <div class="danger-zone-row">
+      <div class="danger-info">
+        <h4>Delete Your Account</h4>
+        <p>
+          This action is irreversible. All your course progress and data will be
+          permanently lost.
+        </p>
+      </div>
+      <button id="delete-account-btn" class="btn btn-danger">
+        Delete Account
+      </button>
+    </div>
+  </div>
+</div>

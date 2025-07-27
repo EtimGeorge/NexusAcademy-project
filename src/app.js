@@ -2,17 +2,17 @@
 
 import { onAuthStateChanged } from "./services/auth.js";
 
-// --- ROUTE DEFINITIONS ---
+// ===================================================================================
+//  MASTER ROUTE DEFINITIONS
+//  This object maps URL paths to the TOP-LEVEL component that should handle them.
+// ===================================================================================
 const routes = {
+  // Public Pages
   "/": { module: "/src/pages/HomePage/HomePage.js", access: "public" },
   "/login": { module: "/src/pages/LoginPage/LoginPage.js", access: "public" },
   "/signup": {
     module: "/src/pages/SignupPage/SignupPage.js",
     access: "public",
-  },
-  "/dashboard": {
-    module: "/src/pages/Dashboard/Dashboard.js",
-    access: "private",
   },
   "/blog": { module: "/src/pages/BlogPage/BlogPage.js", access: "public" },
   "/courses": {
@@ -22,6 +22,23 @@ const routes = {
   "/why-nexus": {
     module: "/src/pages/WhyNexusPage/WhyNexusPage.js",
     access: "public",
+  },
+
+  // --- Authenticated App Shell ---
+  // *** THE CRITICAL CHANGE IS HERE ***
+  // Any route that is part of the logged-in experience now points to Dashboard.js.
+  // The Dashboard.js component itself will handle the sub-routes.
+  "/dashboard": {
+    module: "/src/pages/Dashboard/Dashboard.js",
+    access: "private",
+  },
+  "/profile": {
+    module: "/src/pages/Dashboard/Dashboard.js",
+    access: "private",
+  },
+  "/settings": {
+    module: "/src/pages/Dashboard/Dashboard.js",
+    access: "private",
   },
 };
 

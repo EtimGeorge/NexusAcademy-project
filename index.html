@@ -4,6 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nexus Academy | Where Human Ingenuity Meets Artificial Intelligence</title>
+
+     <script>
+      // This script checks if the 404.html page has saved a redirect path.
+      (function() {
+        const redirect = sessionStorage.redirect;
+        // If a redirect path exists, we delete it from storage to avoid infinite loops.
+        delete sessionStorage.redirect;
+        // If a redirect path was found, we update the window's location to that path.
+        if (redirect && redirect !== location.href) {
+          history.replaceState(null, null, redirect);
+        }
+      })();
+    </script>
     <!-- Link to Google Fonts for the 'Inter' font -->
 
      <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
@@ -13,8 +26,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
 
     <!-- These paths MUST be relative to index.html -->
-    <link rel="stylesheet" href="./src/reset.css">
-    <link rel="stylesheet" href="./src/style.css">
+    <link rel="stylesheet" href="src/reset.css">
+    <link rel="stylesheet" href="src/style.css">
 </head>
 <body>
 
@@ -27,6 +40,6 @@
     <main id="root"></main>
 
     <!-- This path MUST be relative to index.html -->
-    <script type="module" src="./src/app.js"></script>
+    <script type="module" src="src/app.js"></script>
 </body>
 </html>

@@ -1,0 +1,104 @@
+<!-- /src/pages/ProfilePage/ProfilePage.html - ENHANCED VERSION -->
+
+<div class="profile-page-content">
+    <!-- Link to the page-specific stylesheet -->
+    <link rel="stylesheet" href="/src/pages/ProfilePage/ProfilePage.css">
+
+    <header class="profile-header">
+        <h1>My Profile</h1>
+        <p>This information will be used for your certificates and communication.</p>
+    </header>
+
+    <div class="profile-card">
+        <form id="profile-form">
+            
+            <!-- --- AVATAR UPLOADER SECTION --- -->
+            <div class="form-group avatar-group">
+                <label>Profile Picture</label>
+                <div class="avatar-uploader">
+                    <div id="profile-avatar-preview" class="avatar-preview">
+                        <!-- User's initials or image will be loaded here by JS -->
+                    </div>
+                    <!-- This is a hidden file input that we'll trigger with our button -->
+                    <input type="file" id="avatar-upload-input" accept="image/png, image/jpeg" style="display: none;">
+                    <button type="button" id="avatar-upload-btn" class="btn btn-secondary">Change Avatar</button>
+                    <small>Recommended: Square image, PNG or JPG.</small>
+                </div>
+            </div>
+
+            <hr class="form-divider">
+
+            <!-- --- PERSONAL DETAILS SECTION --- -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="profile-first-name">First Name</label>
+                    <input type="text" id="profile-first-name" placeholder="Your first name" required>
+                </div>
+                <div class="form-group">
+                    <label for="profile-last-name">Last Name</label>
+                    <input type="text" id="profile-last-name" placeholder="Your last name" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="profile-display-name">Display Name (Public)</label>
+                <input type="text" id="profile-display-name" placeholder="How you appear publicly">
+                <small>This name will be shown in comments and discussions.</small>
+            </div>
+
+            <hr class="form-divider">
+
+            <!-- --- CONTACT DETAILS SECTION --- -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="profile-email">Email Address</label>
+                    <input type="email" id="profile-email" readonly disabled>
+                    <small>Email cannot be changed.</small>
+                </div>
+                <div class="form-group">
+                    <label for="profile-whatsapp">WhatsApp Number</label>
+                    <input type="tel" id="profile-whatsapp" placeholder="+1 (555) 123-4567">
+                    <small>Used to connect you with our AI Tutor.</small>
+                </div>
+            </div>
+
+            <hr class="form-divider">
+
+            <!-- --- ADDRESS SECTION --- -->
+            <div class="form-group">
+                <label for="profile-address1">Address Line 1</label>
+                <input type="text" id="profile-address1" placeholder="e.g., 123 Nexus Way">
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="profile-country">Country</label>
+                    <select id="profile-country" required>
+                        <option value="">Select a Country</option>
+                        <!-- Countries will be populated here by JavaScript -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="profile-state-select">State / Province</label>
+                    <div id="state-input-container">
+                        <!-- The State dropdown, initially disabled -->
+                        <select id="profile-state-select" disabled>
+                            <option value="">Select a State</option>
+                        </select>
+                        <!-- The manual text input, initially hidden -->
+                        <input type="text" id="profile-state-manual" placeholder="Enter your state/province" style="display: none;">
+                    </div>
+                    <a href="#" id="toggle-manual-state" class="manual-input-toggle">Enter Manually</a>
+                </div>
+            </div>
+             <div class="form-group">
+                <label for="profile-city">City</label>
+                <input type="text" id="profile-city" placeholder="e.g., A.I. Town">
+            </div>
+
+            <!-- --- FORM ACTIONS --- -->
+            <div class="form-actions">
+                <button type="submit" id="profile-save-btn" class="btn btn-primary" disabled>Save Changes</button>
+                <p id="profile-success-message" class="success-message" style="display: none;">Profile saved successfully!</p>
+            </div>
+        </form>
+    </div>
+</div>
