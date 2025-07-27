@@ -8,19 +8,16 @@ import { onAuthStateChanged } from "./services/auth.js";
 // ===================================================================================
 const routes = {
   // Public Pages
-  "/": { module: "/src/pages/HomePage/HomePage.js", access: "public" },
-  "/login": { module: "/src/pages/LoginPage/LoginPage.js", access: "public" },
-  "/signup": {
-    module: "/src/pages/SignupPage/SignupPage.js",
-    access: "public",
-  },
-  "/blog": { module: "/src/pages/BlogPage/BlogPage.js", access: "public" },
+  "/": { module: "./pages/HomePage/HomePage.js", access: "public" },
+  "/login": { module: "./pages/LoginPage/LoginPage.js", access: "public" },
+  "/signup": { module: "./pages/SignupPage/SignupPage.js", access: "public" },
+  "/blog": { module: "./pages/BlogPage/BlogPage.js", access: "public" },
   "/courses": {
-    module: "/src/pages/CoursesPage/CoursesPage.js",
+    module: "./pages/CoursesPage/CoursesPage.js",
     access: "public",
   },
   "/why-nexus": {
-    module: "/src/pages/WhyNexusPage/WhyNexusPage.js",
+    module: "./pages/WhyNexusPage/WhyNexusPage.js",
     access: "public",
   },
 
@@ -28,18 +25,9 @@ const routes = {
   // *** THE CRITICAL CHANGE IS HERE ***
   // Any route that is part of the logged-in experience now points to Dashboard.js.
   // The Dashboard.js component itself will handle the sub-routes.
-  "/dashboard": {
-    module: "/src/pages/Dashboard/Dashboard.js",
-    access: "private",
-  },
-  "/profile": {
-    module: "/src/pages/Dashboard/Dashboard.js",
-    access: "private",
-  },
-  "/settings": {
-    module: "/src/pages/Dashboard/Dashboard.js",
-    access: "private",
-  },
+  "/dashboard": { module: "./pages/Dashboard/Dashboard.js", access: "private" },
+  "/profile": { module: "./pages/Dashboard/Dashboard.js", access: "private" },
+  "/settings": { module: "./pages/Dashboard/Dashboard.js", access: "private" },
 };
 
 // --- ELEMENT REFERENCES ---
@@ -78,7 +66,7 @@ const router = async () => {
       if (pathParts.length === 3) {
         dynamicParams = { id: pathParts[2] }; // e.g., from /#/course/some-id
         matchedRoute = {
-          module: "/src/pages/CoursePlayer/CoursePlayer.js",
+          module: "./pages/CoursePlayer/CoursePlayer.js",
           access: "private",
         };
       }
@@ -90,7 +78,7 @@ const router = async () => {
       if (pathParts.length === 3) {
         dynamicParams = { id: pathParts[2] }; // e.g., from /#/blog/post-1
         matchedRoute = {
-          module: "/src/pages/SinglePostPage/SinglePostPage.js",
+          module: "./pages/SinglePostPage/SinglePostPage.js",
           access: "public",
         };
       }

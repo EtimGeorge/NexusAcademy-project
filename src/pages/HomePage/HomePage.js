@@ -3,6 +3,7 @@
 // We import the initNavbar function from our reusable Navbar component.
 import { initNavbar } from '../../components/Navbar/Navbar.js';
 
+
 // ===================================================================================
 //  CONTENT AREA
 //  All text and image data is stored here. To change a course title or testimonial,

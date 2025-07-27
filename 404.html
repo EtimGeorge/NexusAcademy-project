@@ -12,31 +12,25 @@
 
       // --- SCRIPT LOGIC ---
       (function() {
-        // Get the full path from the URL, e.g., /nexus-academy/dashboard
         const path = window.location.pathname;
-
-        // Get any query parameters, e.g., ?id=123
         const query = window.location.search;
 
-        // This is the critical fix. We check if the path starts with our
-        // repository name and, if so, we remove it to get the clean app path.
+        // This is the critical fix. We remove the repository name from the start of the path.
         const cleanedPath = path.startsWith(repoName)
           ? path.substring(repoName.length)
           : path;
         
         // Construct the correct redirect URL for our hash-based router.
-        // e.g., /#/dashboard
         const redirect = `/#${cleanedPath.replace(/^\//, '')}${query}`;
         
-        // We use sessionStorage to store this correct redirect path.
         sessionStorage.redirect = redirect;
       })();
     </script>
     
-    <!-- This meta tag immediately redirects the browser to the root index.html page -->
-    <meta http-equiv="refresh" content="0; url=/">
+    <!-- This now correctly redirects to the root of your project on GitHub Pages -->
+    <meta http-equiv="refresh" content="0; url=/NexusAcademy-project/">
   </head>
   <body>
-    <p>If you are not redirected automatically, please <a href="/">click here</a>.</p>
+    <p>If you are not redirected automatically, please <a href="/NexusAcademy-project/">click here</a>.</p>
   </body>
 </html>
