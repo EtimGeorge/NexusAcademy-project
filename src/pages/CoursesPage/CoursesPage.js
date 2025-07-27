@@ -267,7 +267,7 @@ function createCourseCardHtml(course) {
                 </div>
                 <h3 class="course-card-title">${course.title}</h3>
                 <p class="course-card-description">${course.description}</p>
-                <a href="/#/course/${course.id}" class="btn btn-primary">View Course</a>
+                <a href="#/course/${course.id}" class="btn btn-primary">View Course</a>
             </div>
         </div>
     `;

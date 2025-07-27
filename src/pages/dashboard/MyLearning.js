@@ -20,7 +20,7 @@ export async function render() {
   const element = document.createElement("div");
 
   if (enrolledCourses.length === 0) {
-    element.innerHTML = `<h2>My Learning</h2><p>You are not yet enrolled in any courses. <a href="/#/courses" style="color: var(--primary-color);">Explore our courses</a> to get started.</p>`;
+    element.innerHTML = `<h2>My Learning</h2><p>You are not yet enrolled in any courses. <a href="#/courses" style="color: var(--primary-color);">Explore our courses</a> to get started.</p>`;
     return element;
   }
 
@@ -73,7 +73,7 @@ function renderMyCourses(courses) {
 function createCourseCardHtml(course, progress) {
   return `
         <div class="course-card animate-on-scroll">
-            <a href="/#/course/${course.id}" class="course-card-link-wrapper">
+            <a href="#/course/${course.id}" class="course-card-link-wrapper">
                 <div class="course-card-image-container">
                     <img src="${
                       course.imageUrl || "https://via.placeholder.com/400x225"
