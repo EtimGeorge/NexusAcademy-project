@@ -1,30 +1,42 @@
-<!-- /404.html -->
+<!-- /404.html - FINAL CORRECTED VERSION FOR GITHUB PAGES -->
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Nexus Academy - Page Not Found</title>
+    <title>Nexus Academy - Redirecting...</title>
     <script>
-      // This script is the magic that makes SPA routing work on GitHub Pages.
-      // It captures the path the user was trying to access.
-      const path = window.location.pathname;
+      // --- CONFIGURATION ---
+      // This is the only part you might ever need to change.
+      // It should be the name of your GitHub repository.
+      const repoName = '/nexus-academy'; 
 
-      // It also captures any query parameters (like ?id=123), which we might need later.
-      const query = window.location.search;
-      
-      // It constructs the correct redirect URL for our hash-based router.
-      // For example, if the user tried to go to /login, it creates /#/login.
-      const redirect = `/#${path.replace(/\/$/, '')}${query}`;
-      
-      // We use sessionStorage to store this redirect path.
-      sessionStorage.redirect = redirect;
+      // --- SCRIPT LOGIC ---
+      (function() {
+        // Get the full path from the URL, e.g., /nexus-academy/dashboard
+        const path = window.location.pathname;
+
+        // Get any query parameters, e.g., ?id=123
+        const query = window.location.search;
+
+        // This is the critical fix. We check if the path starts with our
+        // repository name and, if so, we remove it to get the clean app path.
+        const cleanedPath = path.startsWith(repoName)
+          ? path.substring(repoName.length)
+          : path;
+        
+        // Construct the correct redirect URL for our hash-based router.
+        // e.g., /#/dashboard
+        const redirect = `/#${cleanedPath.replace(/^\//, '')}${query}`;
+        
+        // We use sessionStorage to store this correct redirect path.
+        sessionStorage.redirect = redirect;
+      })();
     </script>
-    <!-- 
-      This meta tag immediately redirects the browser to our main index.html page.
-      The '0' means "zero seconds delay".
-    -->
+    
+    <!-- This meta tag immediately redirects the browser to the root index.html page -->
     <meta http-equiv="refresh" content="0; url=/">
   </head>
   <body>
+    <p>If you are not redirected automatically, please <a href="/">click here</a>.</p>
   </body>
 </html>
