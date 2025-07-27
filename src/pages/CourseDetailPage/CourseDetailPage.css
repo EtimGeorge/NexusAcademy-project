@@ -1,0 +1,167 @@
+/* /src/pages/CourseDetailPage/CourseDetailPage.css */
+
+/* --- Page Wrapper & Loader --- */
+.course-detail-wrapper {
+  background-color: #0b0f19;
+  color: #d1d5db;
+}
+#course-detail-content {
+  padding-bottom: 6rem;
+}
+
+/* --- Course Hero Section --- */
+.course-hero {
+  padding: 3rem 0;
+  text-align: center;
+  border-bottom: 1px solid #374151;
+}
+.course-category {
+  color: var(--primary-color);
+  font-weight: 700;
+  margin-bottom: 1rem;
+  display: block;
+}
+.course-hero h1 {
+  font-size: 2.5rem;
+  color: white;
+  line-height: 1.2;
+  max-width: 800px;
+  margin: 0 auto 1rem auto;
+}
+.course-hero p {
+  font-size: 1.125rem;
+  color: #9ca3af;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+/* --- Main Layout Grid --- */
+/* Mobile-first: The purchase card (sidebar) stacks on top */
+.course-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+/* --- Main Content (Left Column on Desktop) --- */
+.course-main-content h2 {
+  font-size: 1.75rem;
+  color: white;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #374151;
+}
+
+/* Curriculum Accordion Styles */
+.curriculum-module {
+  border: 1px solid #374151;
+  border-radius: 12px;
+  margin-bottom: 1rem;
+  overflow: hidden;
+}
+.module-header {
+  background-color: #111827;
+  padding: 1rem 1.5rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.module-header h3 {
+  color: white;
+  font-size: 1.125rem;
+}
+.module-toggle-icon {
+  transition: transform 0.3s ease;
+  fill: white;
+}
+.lesson-list {
+  max-height: 0; /* Hidden by default */
+  overflow: hidden;
+  transition: max-height 0.4s ease-out, padding 0.4s ease-out;
+  background-color: #1d2333;
+  padding: 0 1.5rem;
+}
+/* This class is toggled by JS to show the lessons */
+.curriculum-module.is-open .lesson-list {
+  max-height: 1000px; /* A large value to allow it to expand fully */
+  padding: 1.5rem;
+}
+.curriculum-module.is-open .module-toggle-icon {
+  transform: rotate(180deg);
+}
+.lesson-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #374151;
+}
+.lesson-item:last-child {
+  border-bottom: none;
+}
+.lesson-item .lesson-icon {
+  color: var(--primary-color);
+}
+
+/* --- Sidebar (Right Column on Desktop) --- */
+.course-sidebar-card {
+  background-color: #111827;
+  border: 1px solid #374151;
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+.course-price {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 1rem;
+}
+.course-sidebar-card .btn-primary {
+  width: 100%;
+  text-align: center;
+  padding: 1rem;
+  font-size: 1.125rem;
+}
+.key-features-list {
+  list-style: none;
+  padding: 1.5rem 0 0 0;
+  margin-top: 1.5rem;
+  border-top: 1px solid #374151;
+}
+.key-feature-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+.key-feature-item svg {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  fill: var(--primary-color);
+}
+
+/* --- DESKTOP RESPONSIVE STYLES --- */
+@media (min-width: 768px) {
+  .course-hero {
+    padding: 5rem 0;
+  }
+  .course-hero h1 {
+    font-size: 3.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  /* Switch to a 2-column layout */
+  .course-layout {
+    grid-template-columns: 1fr 380px; /* Flexible main content, fixed sidebar */
+    gap: 3rem;
+  }
+  /* Make the purchase card sticky on desktop */
+  .course-sidebar {
+    position: sticky;
+    top: 2rem; /* Add some space from the top */
+  }
+}

@@ -98,4 +98,20 @@
       </button>
     </div>
   </div>
+
+  <!-- The Modal for Account Deletion Confirmation -->
+  <div id="delete-account-modal" class="modal-overlay" style="display: none;">
+    <div class="modal-content">
+      <h2>Confirm Account Deletion</h2>
+      <p>This action is permanent. To proceed, please type <strong>DELETE</strong> in the box below and click confirm.
+      </p>
+      <div class="form-group">
+        <label for="delete-confirm-input">Confirmation</label>
+        <input type="text" id="delete-confirm-input" placeholder="Type DELETE here">
+      </div>
+      <div class="modal-actions">
+        <button id="modal-cancel-btn" class="btn btn-secondary">Cancel</button>
+        <button id="modal-confirm-btn" class="btn btn-danger" disabled>Confirm Deletion</button>
+      </div>
+    </div>
 </div>

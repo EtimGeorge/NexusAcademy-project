@@ -10,10 +10,11 @@ import {
   updateProfile,
   EmailAuthProvider,
   reauthenticateWithCredential,
+  reauthenticateWithPopup, // *** THIS IS THE ONLY ADDITION ***
   updatePassword,
-  deleteUser
+  deleteUser,
 } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js";
-import { auth } from './firebase.js';
+import { auth } from "./firebase.js";
 
 const googleProvider = new GoogleAuthProvider();
 
@@ -52,21 +53,48 @@ export const onAuthStateChanged = (callback) => {
  * @returns {Promise<void>}
  */
 export const updateUserProfile = (profileData) => {
-    const user = auth.currentUser;
-    if (!user) return Promise.reject(new Error("No authenticated user found."));
-    return updateProfile(user, profileData);
+  const user = auth.currentUser;
+  if (!user) return Promise.reject(new Error("No authenticated user found."));
+  return updateProfile(user, profileData);
 };
 
 /**
- * Re-authenticates the current user with their password.
- * @param {string} currentPassword - The user's current password.
- * @returns {Promise<void>}
+ * Re-authenticates the current user based on their original sign-in method.
+ * This is the new, smart function that handles both Password and Google users.
+ * @param {string} [currentPassword] - The user's current password, ONLY required for email/password users.
+ * @returns {Promise<void>} A promise that resolves if re-authentication is successful.
  */
 export const reauthenticateUser = (currentPassword) => {
-    const user = auth.currentUser;
-    if (!user) return Promise.reject(new Error("No user is currently signed in."));
-    const credential = EmailAuthProvider.credential(user.email, currentPassword);
+  const user = auth.currentUser;
+  if (!user)
+    return Promise.reject(new Error("No user is currently signed in."));
+
+  // Check the user's provider data to see how they signed in.
+  const providerId = user.providerData[0].providerId;
+
+  if (providerId === "password") {
+    // User signed in with email/password. This requires a password.
+    if (!currentPassword) {
+      return Promise.reject(
+        new Error("Password is required for re-authentication.")
+      );
+    }
+    const credential = EmailAuthProvider.credential(
+      user.email,
+      currentPassword
+    );
     return reauthenticateWithCredential(user, credential);
+  }
+
+  if (providerId === "google.com") {
+    // User signed in with Google. This triggers a popup.
+    return reauthenticateWithPopup(user, googleProvider);
+  }
+
+  // Handle other providers or unexpected cases in the future.
+  return Promise.reject(
+    new Error("Unsupported authentication provider for re-authentication.")
+  );
 };
 
 /**
@@ -75,9 +103,10 @@ export const reauthenticateUser = (currentPassword) => {
  * @returns {Promise<void>}
  */
 export const updateUserPassword = (newPassword) => {
-    const user = auth.currentUser;
-    if (!user) return Promise.reject(new Error("No user is currently signed in."));
-    return updatePassword(user, newPassword);
+  const user = auth.currentUser;
+  if (!user)
+    return Promise.reject(new Error("No user is currently signed in."));
+  return updatePassword(user, newPassword);
 };
 
 /**
@@ -85,7 +114,8 @@ export const updateUserPassword = (newPassword) => {
  * @returns {Promise<void>}
  */
 export const deleteUserAccount = () => {
-    const user = auth.currentUser;
-    if (!user) return Promise.reject(new Error("No user is currently signed in."));
-    return deleteUser(user);
+  const user = auth.currentUser;
+  if (!user)
+    return Promise.reject(new Error("No user is currently signed in."));
+  return deleteUser(user);
 };

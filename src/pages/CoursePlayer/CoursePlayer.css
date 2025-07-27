@@ -1,54 +1,149 @@
-/* /src/pages/CoursePlayer/CoursePlayer.css */
+/* /src/pages/CoursePlayer/CoursePlayer.css - NEXUS "DIGITAL CLASSROOM" VERSION */
+
+/* --- Page Wrapper --- */
+.course-player-wrapper {
+    background-color: #0B0F19;
+    color: #D1D5DB;
+    /* We use vh (viewport height) to make the layout take up the full screen height */
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* Prevents the whole page from scrolling */
+}
+
+/* --- Main Layout --- */
+/* On mobile, this is a flex container that will be manipulated by JS */
 .course-player-layout {
     display: flex;
-    height: calc(100vh - 60px); /* Full viewport height minus a header */
-}
-.lesson-sidebar {
-    width: 350px;
-    background-color: var(--background-subtle-color);
-    border-right: 1px solid var(--border-color);
-    overflow-y: auto;
-}
-.lesson-main-content {
-    flex: 1;
-    padding: 2rem;
-    overflow-y: auto;
-}
-.video-container {
-    position: relative;
-    padding-bottom: 56.25%; /* 16:9 aspect ratio */
-    height: 0;
+    flex: 1; /* This makes the layout fill the available space */
     overflow: hidden;
-    background-color: #000;
-    border-radius: 8px;
+    position: relative; /* For positioning the mobile toggle button */
 }
-.video-container iframe {
+
+/* --- Lesson Sidebar --- */
+.lesson-sidebar {
+    background-color: #111827;
+    border-right: 1px solid #374151;
+    display: flex;
+    flex-direction: column;
+    
+    /* --- Mobile Sidebar Behavior --- */
     position: absolute;
     top: 0;
-    left: 0;
-    width: 100%;
+    left: -100%; /* Start off-screen */
+    width: 85%;
+    max-width: 350px;
     height: 100%;
+    z-index: 100;
+    transition: left 0.4s ease-in-out;
 }
-.lesson-content-text {
-    margin-top: 2rem;
+.lesson-sidebar.is-active {
+    left: 0;
 }
-.lesson-list {
-    padding: 1rem;
+.sidebar-header {
+    padding: 1.5rem;
+    border-bottom: 1px solid #374151;
 }
-.lesson-list-item a {
-    display: block;
-    padding: 0.75rem 1rem;
-    border-radius: 6px;
+.sidebar-header h2 {
+    color: white;
+    font-size: 1.25rem;
     margin-bottom: 0.5rem;
+}
+.sidebar-header a {
+    color: #9CA3AF;
+    text-decoration: none;
+    font-size: 0.875rem;
+    transition: color 0.2s;
+}
+.sidebar-header a:hover { color: var(--primary-color); }
+
+#lesson-list-container {
+    overflow-y: auto; /* Allows only the lesson list to scroll */
+    flex: 1;
+}
+.module-title {
+    padding: 1rem 1.5rem 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #9CA3AF;
+    letter-spacing: 0.5px;
+}
+.lesson-list { padding: 0 1rem 1rem 1rem; }
+.lesson-list-item a {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    margin-bottom: 0.25rem;
     font-weight: 500;
     transition: background-color 0.2s;
 }
-.lesson-list-item a:hover {
-    background-color: #E5E7EB;
+.lesson-list-item a:hover { background-color: #1D2333; }
+.lesson-list-item.active a { background-color: var(--primary-color); color: white; }
+.lesson-icon { color: #9CA3AF; }
+.lesson-list-item.active .lesson-icon { color: white; }
+
+
+/* --- Main Content Area --- */
+.lesson-main-content {
+    flex: 1;
+    padding: 1.5rem;
+    overflow-y: auto; /* Allows the content area to scroll independently */
 }
-.lesson-list-item.active a {
-    background-color: var(--primary-color);
-    color: white;
+.lesson-main-content h3 {
+    color: white; font-size: 1.75rem; margin-bottom: 1.5rem;
+}
+.video-container {
+    position: relative; padding-bottom: 56.25%; height: 0;
+    overflow: hidden; background-color: #000; border-radius: 12px;
+}
+.video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+.lesson-content-text { margin-top: 2rem; font-size: 1.1rem; line-height: 1.8; }
+
+
+/* --- Mobile Toggle Button --- */
+.sidebar-toggle-btn {
+    position: fixed; /* Sticks to the viewport */
+    top: 1.5rem;
+    left: var(--container-padding);
+    z-index: 1001; /* On top of everything */
+    background-color: #480575;
+    border: 1px solid #becce4;
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+.sidebar-toggle-btn .hamburger { /* Re-using hamburger styles */
+    width: 24px; height: 24px;
+}
+.sidebar-toggle-btn .hamburger span {
+    height: 3px; width: 24px;
 }
 
-iCvdaruK40ZF55Y4KMA6fnlBsjB3
+
+/* --- DESKTOP RESPONSIVE STYLES --- */
+@media (min-width: 1024px) {
+    /* Hide the mobile toggle on desktop */
+    .sidebar-toggle-btn {
+        display: none;
+    }
+
+    /* Reset the sidebar to be a static, permanent column */
+    .lesson-sidebar {
+        position: static;
+        flex-shrink: 0; /* Prevents the sidebar from shrinking */
+        width: 350px;
+        height: auto;
+        transition: none;
+    }
+    
+    .lesson-main-content {
+        padding: 2.5rem;
+    }
+}

@@ -1,0 +1,53 @@
+<!-- /src/pages/CoursePlayer/CoursePlayer.html - NEXUS "DIGITAL CLASSROOM" VERSION -->
+
+<div class="course-player-wrapper">
+  
+  <link rel="stylesheet" href="/src/pages/CoursePlayer/CoursePlayer.css" />
+    <!-- 
+      This is the mobile-only button to show/hide the lesson sidebar.
+      It uses the same 'hamburger' class for a consistent icon.
+    -->
+    <button class="sidebar-toggle-btn" id="sidebar-toggle-btn" aria-label="Toggle Lesson List">
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </button>
+    
+    <!-- 
+      The main flex container for our layout.
+    -->
+    <div class="course-player-layout">
+        
+        <!-- 
+          LESSON SIDEBAR:
+          On mobile, this element's visibility is toggled by the button above.
+          On desktop, it is a permanent column.
+        -->
+        <aside class="lesson-sidebar" id="lesson-sidebar">
+            <header class="sidebar-header">
+                <!-- The course title will be injected here by JavaScript -->
+                <h2 id="sidebar-course-title">Loading Course...</h2>
+                <a href="/#/dashboard">← Back to Dashboard</a>
+            </header>
+            
+            <!-- 
+              This container will be populated with the list of modules and lessons.
+              It's a separate div to allow it to scroll independently of the header.
+            -->
+            <div id="lesson-list-container">
+                <!-- Lesson list will be injected here by JavaScript -->
+            </div>
+        </aside>
+
+        <!-- 
+          MAIN CONTENT AREA:
+          This is where the video player and lesson text are displayed.
+        -->
+        <main id="lesson-main-content" class="lesson-main-content">
+            <!-- Active lesson content will be injected here by JavaScript -->
+            <div class="page-loader-container"><div class="spinner"></div></div>
+        </main>
+    </div>
+</div>

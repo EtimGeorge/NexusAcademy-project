@@ -8,6 +8,8 @@ import {
   deleteUserAccount,
 } from "../../services/auth.js";
 
+import { deleteUserProfile } from "../../services/db.js";
+
 // ===================================================================================
 //  CORE PAGE LOGIC
 // ===================================================================================
@@ -36,7 +38,7 @@ export function init() {
   initChangePasswordForm();
   initPaymentManagement();
   initPreferences();
-  initDangerZone();
+  initDangerZone(user);
 }
 
 // ===================================================================================
@@ -49,6 +51,14 @@ export function init() {
 function initChangePasswordForm() {
   const form = document.getElementById("change-password-form");
   if (!form) return;
+
+  // NEW: Hide the change password form entirely if the user is not a password user.
+  const providerId = auth.currentUser.providerData[0].providerId;
+  if (providerId !== "password") {
+    form.innerHTML =
+      "<p>Password management is not available for accounts created with Google.</p>";
+    return;
+  }
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -116,47 +126,86 @@ function initPreferences() {
 }
 
 /**
- * Handles the logic for the "Danger Zone" functionalities.
+ * *** THIS IS THE CRITICAL UPGRADE ***
+ * Handles the logic for the "Danger Zone" using a secure modal dialog.
+ * @param {object} user - The current Firebase user object.
  */
-function initDangerZone() {
+function initDangerZone(user) {
   const deleteBtn = document.getElementById("delete-account-btn");
-  if (deleteBtn) {
-    deleteBtn.addEventListener("click", async () => {
-      // This is a destructive action, so we use multiple confirmation steps.
-      const confirmation1 = prompt(
-        "This action is irreversible. To confirm, please type 'DELETE' in the box below."
-      );
-      if (confirmation1 !== "DELETE") {
-        alert("Deletion cancelled.");
-        return;
-      }
+  const modal = document.getElementById("delete-account-modal");
+  if (!deleteBtn || !modal) return;
 
-      const currentPassword = prompt(
-        "For your security, please enter your current password to confirm account deletion."
-      );
-      if (!currentPassword) {
-        alert("Password not provided. Deletion cancelled.");
-        return;
-      }
+  const confirmInput = document.getElementById("delete-confirm-input");
+  const confirmBtn = document.getElementById("modal-confirm-btn");
+  const cancelBtn = document.getElementById("modal-cancel-btn");
 
-      try {
-        // First, re-authenticate the user to ensure they are the legitimate owner.
-        await reauthenticateUser(currentPassword);
-        // If successful, proceed with deletion.
-        await deleteUserAccount();
+  // --- Step 1: Show the modal when the main "Delete Account" button is clicked ---
+  deleteBtn.addEventListener("click", () => {
+    modal.style.display = "flex";
+    // A small delay to allow the display change, then trigger the fade-in animation
+    setTimeout(() => modal.classList.add("is-visible"), 10);
+  });
 
-        alert(
-          "Your account has been successfully deleted. You will now be logged out."
+  // --- Step 2: Handle the modal's internal logic ---
+  const closeModal = () => {
+    modal.classList.remove("is-visible");
+    // Wait for the fade-out animation to finish before hiding the element
+    setTimeout(() => {
+      modal.style.display = "none";
+      confirmInput.value = ""; // Reset the input field
+      confirmBtn.disabled = true; // Reset the confirm button
+    }, 300);
+  };
+
+  cancelBtn.addEventListener("click", closeModal);
+
+  // Enable the confirm button only when the user types 'DELETE'
+  confirmInput.addEventListener("input", () => {
+    confirmBtn.disabled = confirmInput.value !== "DELETE";
+  });
+
+  // --- Step 3: Handle the final confirmation click ---
+  confirmBtn.addEventListener("click", async () => {
+    // This click is a direct user action, so the popup will not be blocked.
+    try {
+      const providerId = user.providerData[0].providerId;
+
+      // Re-authenticate the user
+      if (providerId === "password") {
+        const currentPassword = prompt(
+          "For your security, please enter your current password to confirm."
         );
-        window.location.hash = "/login"; // Redirect to login page
-      } catch (error) {
-        console.error("Account deletion failed:", error);
-        if (error.code === "auth/wrong-password") {
-          alert("Incorrect password. Account deletion cancelled.");
-        } else {
-          alert("An error occurred while trying to delete your account.");
-        }
+        if (!currentPassword) return; // User cancelled the password prompt
+        await reauthenticateUser(currentPassword);
+      } else {
+        await reauthenticateUser(); // This will trigger the Google popup
       }
-    });
-  }
+
+      // --- If re-authentication is successful, proceed ---
+      alert("Re-authentication successful. Deleting account data...");
+
+      // Delete Firestore data first
+      await deleteUserProfile(user.uid);
+
+      // Delete the Auth account last
+      await deleteUserAccount();
+
+      alert("Your account has been successfully deleted.");
+      window.location.hash = "/login";
+    } catch (error) {
+      console.error("Account deletion failed:", error);
+      // Provide specific feedback to the user
+      if (error.code === "auth/wrong-password") {
+        alert("Incorrect password. Account deletion cancelled.");
+      } else if (
+        error.code === "auth/cancelled-popup-request" ||
+        error.code === "auth/popup-closed-by-user"
+      ) {
+        alert("Re-authentication was cancelled. Account deletion cancelled.");
+      } else {
+        alert("An error occurred during re-authentication. Please try again.");
+      }
+      closeModal(); // Close the modal on failure
+    }
+  });
 }

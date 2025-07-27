@@ -13,6 +13,7 @@ import {
   setDoc,
   serverTimestamp,
   orderBy, // Merged imports for cleanliness
+  deleteDoc 
 } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js";
 import { db } from "./firebase.js"; // Our initialized Firestore instance
 
@@ -161,4 +162,19 @@ export const updateUserProfileData = (userId, profileData) => {
   const userRef = doc(db, "users", userId);
   // Use setDoc with { merge: true } to only update the fields provided, without overwriting the entire document.
   return setDoc(userRef, profileData, { merge: true });
+};
+
+// --- THIS IS THE NEW CODE BLOCK ---
+// Add this function to the end of your /src/services/db.js file.
+
+/**
+ * Deletes a user's profile document from the 'users' collection in Firestore.
+ * This should be called before deleting the user from Firebase Auth.
+ * @param {string} userId - The UID of the user whose profile to delete.
+ * @returns {Promise<void>} A promise that resolves when the document is deleted.
+ */
+export const deleteUserProfile = (userId) => {
+    if (!userId) return Promise.reject(new Error("User ID is required."));
+    const userRef = doc(db, 'users', userId);
+    return deleteDoc(userRef);
 };
