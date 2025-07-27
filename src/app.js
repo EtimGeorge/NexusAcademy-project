@@ -64,7 +64,7 @@ const router = async () => {
     if (path.startsWith("/course/")) {
       const pathParts = path.split("/");
       if (pathParts.length === 3) {
-        dynamicParams = { id: pathParts[2] }; // e.g., from /#/course/some-id
+        dynamicParams = { id: pathParts[2] }; // e.g., from #/course/some-id
         matchedRoute = {
           module: "./pages/CoursePlayer/CoursePlayer.js",
           access: "private",
@@ -76,7 +76,7 @@ const router = async () => {
     else if (path.startsWith("/blog/")) {
       const pathParts = path.split("/");
       if (pathParts.length === 3) {
-        dynamicParams = { id: pathParts[2] }; // e.g., from /#/blog/post-1
+        dynamicParams = { id: pathParts[2] }; // e.g., from #/blog/post-1
         matchedRoute = {
           module: "./pages/SinglePostPage/SinglePostPage.js",
           access: "public",

@@ -18,7 +18,7 @@ const featuredCourses = [
     flexibility: "Self-Paced",
     imageUrl:
       "https://images.pexels.com/photos/879109/pexels-photo-879109.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-    link: "/#/signup",
+    link: "#/signup",
   },
   {
     title: "AI for Business & Productivity",
@@ -28,7 +28,7 @@ const featuredCourses = [
     flexibility: "Self-Paced",
     imageUrl:
       "https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-    link: "/#/signup",
+    link: "#/signup",
   },
   {
     title: "The Agentic Architect Program",
@@ -38,7 +38,7 @@ const featuredCourses = [
     flexibility: "Cohort-Based",
     imageUrl:
       "https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-    link: "/#/signup",
+    link: "#/signup",
   },
 ];
 

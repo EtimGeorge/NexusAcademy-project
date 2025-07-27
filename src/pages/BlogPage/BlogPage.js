@@ -8,13 +8,13 @@ import { allBlogPosts } from "../../services/mockData.js";
 const popularCourses = [
   {
     title: "AI for Content & Marketing",
-    link: "/#/signup",
+    link: "#/signup",
     imageUrl:
       "https://images.pexels.com/photos/879109/pexels-photo-879109.jpeg?auto=compress&cs=tinysrgb&w=120&h=120&dpr=1",
   },
   {
     title: "The Agentic Architect Program",
-    link: "/#/signup",
+    link: "#/signup",
     imageUrl:
       "https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg?auto=compress&cs=tinysrgb&w=120&h=120&dpr=1",
   },
