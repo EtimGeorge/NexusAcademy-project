@@ -1,36 +1,24 @@
-<!-- /404.html - FINAL CORRECTED VERSION FOR GITHUB PAGES -->
+<!-- /404.html - THIS IS NOW AN EXACT COPY OF INDEX.HTML -->
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>Nexus Academy - Redirecting...</title>
-    <script>
-      // --- CONFIGURATION ---
-      // This is the only part you might ever need to change.
-      // It should be the name of your GitHub repository.
-      const repoName = '/NexusAcademy-project'; 
-
-      // --- SCRIPT LOGIC ---
-      (function() {
-        const path = window.location.pathname;
-        const query = window.location.search;
-
-        // This is the critical fix. We remove the repository name from the start of the path.
-        const cleanedPath = path.startsWith(repoName)
-          ? path.substring(repoName.length)
-          : path;
-        
-        // Construct the correct redirect URL for our hash-based router.
-        const redirect = `/#${cleanedPath.replace(/^\//, '')}${query}`;
-        
-        sessionStorage.redirect = redirect;
-      })();
-    </script>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus Academy | Where Human Ingenuity Meets Artificial Intelligence</title>
     
-    <!-- This now correctly redirects to the root of your project on GitHub Pages -->
-    <meta http-equiv="refresh" content="0; url=/NexusAcademy-project/">
-  </head>
-  <body>
-    <p>If you are not redirected automatically, please <a href="/NexusAcademy-project/">click here</a>.</p>
-  </body>
+    <!-- NOTE: The sessionStorage redirect script has been removed. -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+
+    <!-- These relative paths are correct. -->
+    <link rel="stylesheet" href="src/reset.css">
+    <link rel="stylesheet" href="src/style.css">
+</head>
+<body>
+    <div id="page-loader" class="page-loader-container">
+        <div class="spinner"></div>
+    </div>
+    <main id="root"></main>
+    <script type="module" src="src/app.js"></script>
+</body>
 </html>

@@ -8,18 +8,12 @@ import { onAuthStateChanged } from "./services/auth.js";
 // ===================================================================================
 const routes = {
   // Public Pages
-  "/": { module: "./pages/HomePage/HomePage.js", access: "public" },
+ "/": { module: "./pages/HomePage/HomePage.js", access: "public" },
   "/login": { module: "./pages/LoginPage/LoginPage.js", access: "public" },
   "/signup": { module: "./pages/SignupPage/SignupPage.js", access: "public" },
   "/blog": { module: "./pages/BlogPage/BlogPage.js", access: "public" },
-  "/courses": {
-    module: "./pages/CoursesPage/CoursesPage.js",
-    access: "public",
-  },
-  "/why-nexus": {
-    module: "./pages/WhyNexusPage/WhyNexusPage.js",
-    access: "public",
-  },
+  "/courses": { module: "./pages/CoursesPage/CoursesPage.js", access: "public" },
+  "/why-nexus": { module: "./pages/WhyNexusPage/WhyNexusPage.js", access: "public" },
 
   // --- Authenticated App Shell ---
   // *** THE CRITICAL CHANGE IS HERE ***

@@ -13,6 +13,7 @@
     text-align: center;
     padding: 4rem 0; /* Vertical padding for mobile */
     position: relative; /* Required for the pseudo-element gradient effect */
+    margin-top: 2em;
 }
 
 /* 

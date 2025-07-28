@@ -7,7 +7,7 @@
       'position: sticky' makes the element stick to the top of the viewport once it scrolls past its initial position.
       'top: 0' specifies that it should stick at the very top.
     */
-    position: sticky;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -52,7 +52,7 @@
 }
 
 .logo-image {
-    height: 40px; /* Controls the height of the logo */
+    height: 75px; /* Controls the height of the logo */
     width: auto;
 }
 
@@ -98,8 +98,26 @@
 
 /* Hides the desktop-only "Sign In" button on mobile */
 .nav-cta-desktop {
-    display: none;
-}
+    display: inline-block;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(21, 208, 225);
+    font-weight: 600;
+    width: 50%;
+    cursor: pointer;
+    border-radius: 0.4em;
+    }
+
+    .nav-cta-desktop:hover, nav a.nav-cta-desktop:hover {
+        background-color: var(--primary-color);
+        color: white;
+    }
+
+    nav a.nav-cta-desktop {
+        color: rgb(13, 13, 13);
+        text-decoration: none;
+    }
 
 
 /* --- Hamburger & Close Button --- */
@@ -147,18 +165,22 @@
 @media (min-width: 768px) {
     /* Resets the mobile nav styles for larger screens */
     .main-nav {
+        text-wrap: nowrap;
         position: static;
-        width: auto;
+        width: 50%;
         height: auto;
         background: transparent;
         flex-direction: row;
         transition: none;
+        
     }
     
     .main-nav a {
-        font-size: 1rem; /* Return to normal font size */
+        font-size: 1.1rem; /* Return to normal font size */
         padding: 0;
         margin-left: 2rem;
+        padding: 0.5rem 1rem;
+        
     }
 
     /* Hides the hamburger and shows the desktop CTA */
@@ -166,7 +188,25 @@
         display: none;
     }
     .nav-cta-desktop {
-        display: inline-block;
+    display: inline-block;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    background-color:  rgb(21, 208, 225);
+    font-weight: 600;
+    width: 50%;
+    cursor: pointer;
+    border-radius: 0.4em;
+    }
+
+    .nav-cta-desktop:hover, nav a.nav-cta-desktop:hover {
+        background-color: var(--primary-color);
+        color: white;
+    }
+
+    nav a.nav-cta-desktop {
+        color: rgb(13, 13, 13);
+        text-decoration: none;
     }
 }
 
