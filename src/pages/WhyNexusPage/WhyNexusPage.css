@@ -10,6 +10,7 @@
 .why-nexus-header {
     text-align: center;
     padding: 4rem 0;
+    
     margin-bottom: 3rem;
 }
 .why-nexus-header h1 {
@@ -17,6 +18,7 @@
     color: white;
     margin-bottom: 1.5rem;
     line-height: 1.2;
+    padding-top: 1em;
 }
 .why-nexus-header p {
     font-size: 1.25rem;
